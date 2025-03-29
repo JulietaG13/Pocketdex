@@ -63,4 +63,7 @@ dependencies {
 
     // nav
     implementation(libs.androidx.navigation.compose)
+
+    // google fonts
+    implementation(libs.androidx.ui.text.google.fonts)
 }
