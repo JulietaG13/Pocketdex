@@ -12,9 +12,12 @@ fun MovingDiagonalBackground() {
     val infiniteTransition = rememberInfiniteTransition()
     val color = LocalExtendedColors.current.lightPrimary
 
+    val strokeWidth = 90f
+    val lineSpacing = strokeWidth * 3
+
     val offsetX by infiniteTransition.animateFloat(
         initialValue = 0f,
-        targetValue = 200f,
+        targetValue = lineSpacing,
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 4000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
@@ -24,8 +27,6 @@ fun MovingDiagonalBackground() {
     Canvas(
         modifier = Modifier.fillMaxSize()
     ) {
-        val strokeWidth = 90f
-        val lineSpacing = strokeWidth * 3
         val extraOffset = size.height
 
         for (i in -extraOffset.toInt()..(size.width + extraOffset).toInt() step lineSpacing.toInt()) {

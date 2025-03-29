@@ -1,9 +1,7 @@
 package com.austral.pocketdex.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -18,6 +16,7 @@ import com.austral.pocketdex.ui.components.MovingDiagonalBackground
 import com.austral.pocketdex.ui.components.PokeCardDialog
 import com.austral.pocketdex.ui.components.PokeListItem
 import com.austral.pocketdex.ui.theme.Dimensions
+import com.austral.pocketdex.util.MockPokemonApi
 
 @Composable
 fun DexScreen() {
@@ -47,9 +46,10 @@ fun DexScreen() {
     }
 
     if (showDialogCard) {
+        val poke = MockPokemonApi().getPokemonById(idClicked)
+
         PokeCardDialog(
-            id = idClicked,
-            name = "name",
+            pokemon = poke!!,
             onDismiss = { showDialogCard = false }
         )
     }
