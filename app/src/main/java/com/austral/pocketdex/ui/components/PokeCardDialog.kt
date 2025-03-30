@@ -95,16 +95,20 @@ fun PokeCardDialog(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(1.7f)
+                            .aspectRatio(1.8f)
                             .background(Color.White, shape = RoundedCornerShape(8.dp))
                     ) {
                         Column {
-                            Spacer(modifier = Modifier.height(Dimensions.SmallPadding))
+                            Spacer(
+                                modifier = Modifier
+                                    .height(Dimensions.SmallSpacer)
+                            )
 
+                            val fraction = if (pokemon.height > 9) 0.8f else 0.9f
                             Sprite(
                                 id = pokemon.id,
                                 modifier = Modifier
-                                    .fillMaxWidth(0.9f)
+                                    .fillMaxWidth(fraction)
                                     .zIndex(-1f)
                             )
                         }
