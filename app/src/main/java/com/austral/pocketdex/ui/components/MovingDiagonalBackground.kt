@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import com.austral.pocketdex.ui.theme.LocalExtendedColors
 
 @Composable
-fun MovingDiagonalBackground() {
+fun MovingDiagonalBackground(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
     val color = LocalExtendedColors.current.lightPrimary
 
@@ -34,7 +34,7 @@ fun MovingDiagonalBackground() {
     )
 
     Canvas(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .graphicsLayer {
                 renderEffect = BlurEffect(

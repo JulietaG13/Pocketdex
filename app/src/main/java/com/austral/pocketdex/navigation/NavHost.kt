@@ -1,13 +1,18 @@
 package com.austral.pocketdex.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,41 +26,52 @@ fun NavHostComposable(
     innerPadding: PaddingValues,
     navController: NavHostController
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = PocketdexScreen.Home.name,
-        modifier = Modifier
-            .fillMaxSize()
-//            .padding(innerPadding)
-//            .padding(horizontal = Dimensions.LargePadding)
-//            .padding(top = Dimensions.MediumPadding)
+
+    val insets = WindowInsets.statusBars.asPaddingValues()
+
+    Box(
+        modifier = Modifier.fillMaxSize()
     ) {
-        composable(route = PocketdexScreen.Home.name) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = Dimensions.LargePadding)
-                    .padding(top = Dimensions.MediumPadding)
-            ) {
-                HomeScreen()
-            }
-        }
 
-        composable(route = PocketdexScreen.Guess.name) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = Dimensions.LargePadding)
-                    .padding(top = Dimensions.MediumPadding)
-            ) {
-                GuessScreen()
-            }
-        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(insets.calculateTopPadding())
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+        )
 
-        composable(route = PocketdexScreen.Dex.name) {
-            DexScreen()
+        NavHost(
+            navController = navController,
+            startDestination = PocketdexScreen.Home.name,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = insets.calculateTopPadding())
+        ) {
+            composable(route = PocketdexScreen.Home.name) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(horizontal = Dimensions.LargePadding)
+                ) {
+                    HomeScreen()
+                }
+            }
+
+            composable(route = PocketdexScreen.Guess.name) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(horizontal = Dimensions.LargePadding)
+                ) {
+                    GuessScreen()
+                }
+            }
+
+            composable(route = PocketdexScreen.Dex.name) {
+                DexScreen()
+            }
         }
     }
 }
