@@ -2,6 +2,7 @@ package com.austral.pocketdex.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -29,7 +30,10 @@ fun DexScreen() {
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(Dimensions.MinSpriteSize),
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = Dimensions.LargePadding * 2)
+            .padding(horizontal = Dimensions.LargePadding),
         horizontalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
         verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding)
     ) {

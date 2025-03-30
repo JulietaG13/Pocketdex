@@ -17,19 +17,19 @@ fun shimmerBorderBrush(): Brush {
 
     val infiniteTransition = rememberInfiniteTransition()
     val shimmerOffset by infiniteTransition.animateFloat(
-        initialValue = -0.2f,
-        targetValue = 0.6f,
+        initialValue = -0.6f,
+        targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(3000, easing = LinearEasing),
+            animation = tween(4000, easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         )
     )
 
     val colors = listOf(
         0.0f + shimmerOffset to Color.Transparent,
-        0.1f + shimmerOffset to Color.White.copy(alpha = 0.4f),
+        0.1f + shimmerOffset to Color.White.copy(alpha = 0.8f),
         0.2f + shimmerOffset to Color.Transparent,
-        0.3f + shimmerOffset to Color.White.copy(alpha = 0.4f),
+        0.3f + shimmerOffset to Color.White.copy(alpha = 0.8f),
         0.4f + shimmerOffset to Color.Transparent,
     )
 

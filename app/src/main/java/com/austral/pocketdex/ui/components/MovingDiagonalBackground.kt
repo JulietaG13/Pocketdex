@@ -1,10 +1,19 @@
 package com.austral.pocketdex.ui.components
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlurEffect
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.graphicsLayer
 import com.austral.pocketdex.ui.theme.LocalExtendedColors
 
 @Composable
@@ -25,9 +34,18 @@ fun MovingDiagonalBackground() {
     )
 
     Canvas(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .graphicsLayer {
+                renderEffect = BlurEffect(
+                    radiusX = 20f,
+                    radiusY = 20f,
+                    edgeTreatment = TileMode.Repeated
+                )
+            }
     ) {
         val extraOffset = size.height
+
 
         for (i in -extraOffset.toInt()..(size.width + extraOffset).toInt() step lineSpacing.toInt()) {
             drawLine(

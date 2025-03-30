@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.zIndex
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.theme.Dimensions
 
@@ -35,19 +36,22 @@ fun PokeCardDialog(
     pokemon: Pokemon,
     onDismiss: () -> Unit
 ) {
+
+    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)
+
     Dialog(onDismissRequest = { onDismiss() }) {
         Box(
             modifier = Modifier
-                .fillMaxSize()
-                .clickable(onClick = onDismiss),
+                .fillMaxSize(),
             contentAlignment = Alignment.Center,
         ) {
             Card(
                 shape = RoundedCornerShape(Dimensions.RoundedCorner),
-                colors = CardDefaults.cardColors(containerColor = pokemon.type[0].color.copy(alpha = 0.2f)),
+                colors = CardDefaults.cardColors(containerColor = containerColor),
                 modifier = Modifier
-                    .fillMaxWidth(0.85f)
-                    .aspectRatio(0.7f)
+                    .fillMaxWidth()
+                    .aspectRatio(0.75f)
+                    .clickable(onClick = onDismiss)
                     .shadow(8.dp, RoundedCornerShape(Dimensions.RoundedCorner))
                     .border(
                         width = 14.dp,
@@ -69,35 +73,44 @@ fun PokeCardDialog(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
+                    // Pokemon name
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .zIndex(1f),
+                        text = pokemon.name,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                        color = Color.Black,
+                        textAlign = TextAlign.Left
+                    )
+
+                    Spacer(modifier = Modifier
+                        .height(Dimensions.MediumPadding)
+                        .fillMaxWidth()
+                        .zIndex(1f)
+                    )
+
                     // Pokemon box
                     Box(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(1.6f)
+                            .aspectRatio(1.7f)
                             .background(Color.White, shape = RoundedCornerShape(8.dp))
-                            .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp)),
                     ) {
-                        Sprite(
-                            id = pokemon.id,
-                            modifier = Modifier
-                                .fillMaxSize(0.8f)
-                                .padding(Dimensions.LargePadding)
-                        )
+                        Column {
+                            Spacer(modifier = Modifier.height(Dimensions.SmallPadding))
+
+                            Sprite(
+                                id = pokemon.id,
+                                modifier = Modifier
+                                    .fillMaxWidth(0.9f)
+                                    .zIndex(-1f)
+                            )
+                        }
                     }
 
-
-
-                    Spacer(modifier = Modifier.height(Dimensions.MediumPadding))
-
-                    // Pokemon name
-                    Text(
-                        text = pokemon.name,
-                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = Color.Black
-                    )
-
-                    Spacer(modifier = Modifier.height(Dimensions.SmallPadding))
+                    Spacer(modifier = Modifier.height(Dimensions.MediumSpacer))
 
                     // Type badges
                     Row(

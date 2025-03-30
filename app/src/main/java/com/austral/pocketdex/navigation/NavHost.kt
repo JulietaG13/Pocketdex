@@ -1,5 +1,6 @@
 package com.austral.pocketdex.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,16 +26,32 @@ fun NavHostComposable(
         startDestination = PocketdexScreen.Home.name,
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
-            .padding(horizontal = Dimensions.LargePadding)
-            .padding(top = Dimensions.MediumPadding)
+//            .padding(innerPadding)
+//            .padding(horizontal = Dimensions.LargePadding)
+//            .padding(top = Dimensions.MediumPadding)
     ) {
         composable(route = PocketdexScreen.Home.name) {
-            HomeScreen()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = Dimensions.LargePadding)
+                    .padding(top = Dimensions.MediumPadding)
+            ) {
+                HomeScreen()
+            }
         }
 
         composable(route = PocketdexScreen.Guess.name) {
-            GuessScreen()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(horizontal = Dimensions.LargePadding)
+                    .padding(top = Dimensions.MediumPadding)
+            ) {
+                GuessScreen()
+            }
         }
 
         composable(route = PocketdexScreen.Dex.name) {
