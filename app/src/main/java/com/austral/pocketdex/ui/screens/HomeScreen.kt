@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.components.Profile
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
@@ -27,7 +28,12 @@ fun HomeScreen() {
             modifier = Modifier.size(150.dp)
         ) {
             Profile(
-                image = { Sprite(id = 1, modifier = Modifier.fillMaxSize()) }
+                image = {
+                    Sprite(
+                        pokemon = Pokemon.EMPTY,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             )
         }
         Spacer(modifier = Modifier.size(Dimensions.MediumSpacer))

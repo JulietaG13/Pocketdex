@@ -104,11 +104,10 @@ fun PokeCardDialog(
                                     .height(Dimensions.SmallSpacer)
                             )
 
-                            val fraction = if (pokemon.height > 9) 0.8f else 0.9f
                             Sprite(
-                                id = pokemon.id,
+                                pokemon = pokemon,
                                 modifier = Modifier
-                                    .fillMaxWidth(fraction)
+                                    .fillMaxWidth(0.9f)
                                     .zIndex(-1f)
                             )
                         }

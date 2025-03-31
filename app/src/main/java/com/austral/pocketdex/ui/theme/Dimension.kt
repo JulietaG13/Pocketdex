@@ -15,4 +15,5 @@ object Dimensions {
 
     val CardBorder = 12.dp
     val RoundedCorner = 24.dp
+    val SmallRoundedCorner = 12.dp
 }

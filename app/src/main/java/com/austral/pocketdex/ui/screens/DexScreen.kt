@@ -10,25 +10,25 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
+import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.components.DexTopBar
 import com.austral.pocketdex.ui.components.MovingDiagonalBackground
 import com.austral.pocketdex.ui.components.PokeCardDialog
 import com.austral.pocketdex.ui.components.PokeListItem
 import com.austral.pocketdex.ui.theme.Dimensions
-import com.austral.pocketdex.util.MockPokemonApi
+import com.austral.pocketdex.util.MockData
 
 @Composable
 fun DexScreen() {
 
-    val pokemons = (1..100).toList()    // last = 1025
+    val pokemons = MockData.pokemonList
     var showDialogCard by remember { mutableStateOf(false) }
-    var idClicked by remember { mutableIntStateOf(0) }
+    var pokemonClicked: Pokemon by remember { mutableStateOf(Pokemon.EMPTY) }
     var showAll by remember { mutableStateOf(false) }
 
 
@@ -60,12 +60,12 @@ fun DexScreen() {
                 horizontalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
                 verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding)
             ) {
-                items(pokemons) { id ->
+                items(pokemons) { pokemon ->
                     PokeListItem(
-                        id = id,
+                        pokemon = pokemon,
                         found = true,
                         onClick = {
-                            idClicked = id
+                            pokemonClicked = pokemon
                             showDialogCard = true
                         }
                     );
@@ -75,10 +75,8 @@ fun DexScreen() {
     }
 
     if (showDialogCard) {
-        val poke = MockPokemonApi().getPokemonById(idClicked)
-
         PokeCardDialog(
-            pokemon = poke!!,
+            pokemon = pokemonClicked,
             onDismiss = { showDialogCard = false }
         )
     }

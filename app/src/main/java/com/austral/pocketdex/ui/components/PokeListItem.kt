@@ -7,11 +7,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.theme.ListItemBackground
 
 @Composable
 fun PokeListItem(
-    id: Int,
+    pokemon: Pokemon,
     found: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -24,9 +25,9 @@ fun PokeListItem(
             .aspectRatio(1f)
     ) {
         if (found) {
-            Sprite(id)
+            Sprite(pokemon)
         } else {
-            Text(text = id.toString())
+            Text(text = pokemon.id.toString())
         }
     }
 }
