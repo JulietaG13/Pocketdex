@@ -1,20 +1,19 @@
 package com.austral.pocketdex.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -24,6 +23,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -32,19 +33,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
-import kotlin.random.Random
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.TextFieldDefaults
+import com.austral.pocketdex.util.MockData
 import com.austral.pocketdex.util.MockPokemonApi
+import kotlin.random.Random
 
 @Composable
 fun GuessScreen() {
     var guess by remember { mutableStateOf("") }
-    var id by remember { mutableIntStateOf(Random.nextInt(1, 1025 + 1)) }
+    var id by remember { mutableIntStateOf(MockData.pokemonList.random().id /*Random.nextInt(1, 1025 + 1)*/) }
     var triesLeft by remember { mutableIntStateOf(3) }
     var revealedHints by remember { mutableStateOf(emptyList<String>()) }
-    val clues = listOf("It's a Water-type!", "It evolves at level 16.") // TODO
     var showResult by remember { mutableStateOf(false) }
+
+    val pokemon = MockPokemonApi().getPokemonById(id)   // TODO
+
+    val clues = listOf("It's a Water-type!", "It evolves at level 16.") // TODO
 
     Column(
         modifier = Modifier
@@ -55,27 +58,25 @@ fun GuessScreen() {
     ) {
 
         // hidden sprite
+        val circleColor = MaterialTheme.colorScheme.surfaceVariant
         Box(
             modifier = Modifier
                 .fillMaxWidth()
+                .drawBehind {
+                    val gradient = Brush.radialGradient(
+                        0.9f to circleColor,
+                        1f to Color.Transparent,
+                        center = center,
+                        radius = (size.minDimension / 2f)
+                    )
+                    drawCircle(brush = gradient, radius = size.minDimension / 2f, center = center)
+                },
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.6f)
-                    .clip(CircleShape)
-                    .aspectRatio(1f)
-//                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 1f))
-                    .background(MaterialTheme.colorScheme.surfaceVariant)
-                    .padding(Dimensions.LargePadding)
-                    .align(Alignment.Center),
-                contentAlignment = Alignment.Center
-            ) {
-            }
 
-            val pokemon = MockPokemonApi().getPokemonById(id)
             Sprite(
                 pokemon = pokemon!!,
-                hidden = true)
+                hidden = !showResult
+            )
         }
 
         // input field
@@ -117,7 +118,7 @@ fun GuessScreen() {
         Button(
             onClick = {
                 if (guess.isNotBlank() && triesLeft > 0) {
-                    if (guess.lowercase() == "pikachu") { // TODO
+                    if (guess.lowercase() == pokemon!!.name.lowercase()) {
                         showResult = true
                     } else {
                         triesLeft--
@@ -161,7 +162,7 @@ fun GuessScreen() {
         // result
         if (showResult) {
             Text(
-                text = "Correct! It's Pikachu!",
+                text = "Correct! It's ${pokemon!!.name}!",
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold
