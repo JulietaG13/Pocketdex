@@ -26,7 +26,7 @@ import com.austral.pocketdex.util.MockData
 @Composable
 fun DexScreen() {
 
-    val pokemons = MockData.pokemonList
+    val pokemons = MockData.pokemonList.sortedBy { it.id }
     var showDialogCard by remember { mutableStateOf(false) }
     var pokemonClicked: Pokemon by remember { mutableStateOf(Pokemon.EMPTY) }
     var showAll by remember { mutableStateOf(false) }
