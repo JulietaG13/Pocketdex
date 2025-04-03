@@ -48,14 +48,7 @@ fun NavHostComposable(
                 .padding(top = insets.calculateTopPadding())
         ) {
             composable(route = PocketdexScreen.Home.name) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding)
-                        .padding(horizontal = Dimensions.LargePadding)
-                ) {
-                    HomeScreen()
-                }
+                HomeScreen()
             }
 
             composable(route = PocketdexScreen.Guess.name) {

@@ -12,12 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.austral.pocketdex.data.model.Pokemon
+import com.austral.pocketdex.ui.components.MovingPokeballBackground
 import com.austral.pocketdex.ui.components.Profile
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
 
 @Composable
 fun HomeScreen() {
+
+    MovingPokeballBackground()
 
     Column(
         modifier = Modifier.fillMaxSize(),
