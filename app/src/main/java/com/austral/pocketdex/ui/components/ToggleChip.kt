@@ -16,7 +16,11 @@ import androidx.compose.ui.graphics.Color
 import com.austral.pocketdex.ui.theme.Dimensions
 
 @Composable
-fun ToggleChip(selected: Boolean, onToggle: (Boolean) -> Unit) {
+fun ToggleChip(
+    leftOption: String,
+    rightOption: String,
+    selected: Boolean,
+    onToggle: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(bottomStart = Dimensions.RoundedCorner, bottomEnd = Dimensions.RoundedCorner))
@@ -36,7 +40,7 @@ fun ToggleChip(selected: Boolean, onToggle: (Boolean) -> Unit) {
             ),
             modifier = Modifier.weight(1f)
         ) {
-            Text("All")
+            Text(leftOption)
         }
 
         TextButton(
@@ -47,7 +51,7 @@ fun ToggleChip(selected: Boolean, onToggle: (Boolean) -> Unit) {
             ),
             modifier = Modifier.weight(1f)
         ) {
-            Text("Found")
+            Text(rightOption)
         }
     }
 }

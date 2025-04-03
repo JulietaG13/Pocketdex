@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,10 +28,16 @@ import com.austral.pocketdex.util.MockData
 fun DexScreen() {
 
     val pokemons = MockData.pokemonList.sortedBy { it.id }
+
     var showDialogCard by remember { mutableStateOf(false) }
     var pokemonClicked: Pokemon by remember { mutableStateOf(Pokemon.EMPTY) }
     var showAll by remember { mutableStateOf(false) }
 
+    var foundPokemonIds by remember { mutableStateOf(setOf<Int>()) }
+
+    LaunchedEffect(Unit) {
+        foundPokemonIds = listOf(1, 2, 3, 10, 11, 13, 15, 16, 17, 28, 39, 84, 113, 700).toSet()
+    }
 
     Column(
         modifier = Modifier
@@ -61,12 +68,15 @@ fun DexScreen() {
                 verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding)
             ) {
                 items(pokemons) { pokemon ->
+                    val found = showAll || pokemon.id in foundPokemonIds
                     PokeListItem(
                         pokemon = pokemon,
-                        found = true,
+                        found = found,
                         onClick = {
-                            pokemonClicked = pokemon
-                            showDialogCard = true
+                            if (found) {
+                                pokemonClicked = pokemon
+                                showDialogCard = true
+                            }
                         }
                     );
                 }

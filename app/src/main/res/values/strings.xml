@@ -8,4 +8,7 @@
     <!-- $.flavor_text_entries[#].flavor_text  at language.name="en" and version="y"? -->
     <string name="characteristics_url">https://pokeapi.co/api/v2/pokemon-species/%1$d/</string>
 
+    <string name="dex_screen_top_bar_toggle_found">Found</string>
+    <string name="dex_screen_top_bar_toggle_all">All</string>
+
 </resources>

@@ -11,7 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.austral.pocketdex.R
 
 @Composable
 fun DexTopBar(
@@ -37,6 +39,8 @@ fun DexTopBar(
             contentAlignment = Alignment.Center
         ) {
             ToggleChip(
+                leftOption = stringResource(R.string.dex_screen_top_bar_toggle_found),
+                rightOption = stringResource(R.string.dex_screen_top_bar_toggle_all),
                 selected = showAll,
                 onToggle = onToggle
             )
