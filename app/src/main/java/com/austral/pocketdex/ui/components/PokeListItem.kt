@@ -24,10 +24,9 @@ fun PokeListItem(
             .fillMaxWidth()
             .aspectRatio(1f)
     ) {
-        if (found) {
-            Sprite(pokemon)
-        } else {
-            Text(text = pokemon.id.toString())
-        }
+        Sprite(
+            pokemon = pokemon,
+            hidden = !found
+        )
     }
 }
