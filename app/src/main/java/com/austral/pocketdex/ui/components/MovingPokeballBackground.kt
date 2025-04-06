@@ -25,8 +25,8 @@ fun MovingPokeballBackground() {
         BitmapFactory.decodeResource(context.resources, R.drawable.pokeball)
     }
 
-    val scaleFactor = 3f
-    val spacingFactor = 3f
+    val scaleFactor = 2.6f
+    val spacingFactor = 2.4f
 
     val scaledWidth = (pokeballBitmap.width * scaleFactor).toInt()
     val scaledHeight = (pokeballBitmap.height * scaleFactor).toInt()
@@ -35,7 +35,7 @@ fun MovingPokeballBackground() {
         initialValue = 0f,
         targetValue = scaledWidth.toFloat() * spacingFactor,
         animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 8000, easing = LinearEasing),
+            animation = tween(durationMillis = 16000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         )
     )

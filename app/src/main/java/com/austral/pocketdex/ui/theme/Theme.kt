@@ -70,11 +70,13 @@ fun PocketdexTheme(
         else -> LightColorScheme
     }
 
-    val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
+//    val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
+    val extendedColors = LightExtendedColors
 
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
-            colorScheme = colorScheme,
+//            colorScheme = colorScheme,
+            colorScheme = LightColorScheme,
             typography = Typography,
             content = content
         )
