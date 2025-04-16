@@ -15,9 +15,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -47,7 +51,9 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(Dimensions.RoundedCorner))
-                .padding(Dimensions.LargePadding)
+                .background(Color.White.copy(alpha = 0.5f))
+                .padding(Dimensions.LargePadding * 3)
+                .padding(bottom = Dimensions.LargePadding * 3)
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
