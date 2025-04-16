@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import coil3.compose.AsyncImage
 import com.austral.pocketdex.R
@@ -19,14 +20,22 @@ fun Sprite(
     hidden: Boolean = false
 ) {
 
-    val scale = if (pokemon.height > 9) 0.9f else 1.0f
+    val scale = when {
+        pokemon.height > 15 -> 0.85f
+        pokemon.height > 9 -> 0.9f
+        else -> 1.0f
+    }
 
     AsyncImage(
         model = stringResource(R.string.sprite_url, pokemon.id),
         contentDescription = "sprite of pokemon #${pokemon.id}",
         modifier = modifier
-            .fillMaxWidth(scale)
+            .fillMaxWidth()
             .aspectRatio(1f)
+            .graphicsLayer {
+                scaleX = scale
+                scaleY = scale
+            }
             .background(Color.Transparent),
         colorFilter = if (hidden) ColorFilter.tint(Color.Black) else null
     )
