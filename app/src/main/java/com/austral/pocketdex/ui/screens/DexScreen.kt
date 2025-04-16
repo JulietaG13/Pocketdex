@@ -3,7 +3,11 @@ package com.austral.pocketdex.ui.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.austral.pocketdex.ui.components.DexTopBar
@@ -29,6 +35,9 @@ fun DexScreen(viewModel: DexViewModel = viewModel()) {
     val showDialogCard by viewModel.showDialogCard.collectAsState()
     val pokemonClicked by viewModel.pokemonClicked.collectAsState()
     val showAll by viewModel.showAll.collectAsState()
+
+    val configuration = LocalConfiguration.current
+    val screenHeightDp = configuration.screenHeightDp.dp
 
     if (showDialogCard) {
         PokeCardDialog(
@@ -63,8 +72,13 @@ fun DexScreen(viewModel: DexViewModel = viewModel()) {
                     .padding(horizontal = Dimensions.LargePadding)
                     .zIndex(0f),
                 horizontalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
-                verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding)
+                verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
+                contentPadding = PaddingValues(
+                    top = Dimensions.LargePadding,
+                    bottom = screenHeightDp / 2
+                )
             ) {
+
                 items(pokemons) { pokemon ->
                     val found = showAll || pokemon.id in foundPokemonIds    // TODO(check)
                     PokeListItem(

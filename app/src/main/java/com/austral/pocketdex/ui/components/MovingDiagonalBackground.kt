@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
@@ -50,8 +51,8 @@ fun MovingDiagonalBackground(modifier: Modifier = Modifier) {
         for (i in -extraOffset.toInt()..(size.width + extraOffset).toInt() step lineSpacing.toInt()) {
             drawLine(
                 color = color,
-                start = androidx.compose.ui.geometry.Offset(i + offsetX + extraOffset, -extraOffset),
-                end = androidx.compose.ui.geometry.Offset(i + offsetX - extraOffset, size.height + extraOffset),
+                start = Offset(i + offsetX + extraOffset, -extraOffset),
+                end = Offset(i + offsetX - extraOffset, size.height + extraOffset),
                 strokeWidth = strokeWidth
             )
         }
