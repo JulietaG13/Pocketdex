@@ -69,8 +69,10 @@ dependencies {
     // google fonts
     implementation(libs.androidx.ui.text.google.fonts)
 
-
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }
