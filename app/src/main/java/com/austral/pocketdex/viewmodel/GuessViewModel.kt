@@ -46,7 +46,7 @@ class GuessViewModel @Inject constructor() : ViewModel() {
 
     fun onCheckGuess() {
         if (_guess.value.isNotBlank() && _triesLeft.value > 0) {
-            if (_guess.value.lowercase() == _pokemon.value.name.lowercase()) {
+            if (_guess.value.lowercase().trim() == _pokemon.value.name.lowercase()) {
                 _showResult.value = true
             } else {
                 _triesLeft.value--
