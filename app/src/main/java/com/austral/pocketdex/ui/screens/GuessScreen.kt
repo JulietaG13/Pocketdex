@@ -27,12 +27,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.austral.pocketdex.R
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
 import com.austral.pocketdex.util.MockData
@@ -84,7 +86,7 @@ fun GuessScreen(viewModel: GuessViewModel = viewModel()) {
             onValueChange = { viewModel.onGuessChanged(it) },
             placeholder = {
                 Text(
-                    "Who's that Pokémon?",
+                    stringResource(R.string.guess_screen_placeholder_whos_that_pokemon),
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -119,12 +121,12 @@ fun GuessScreen(viewModel: GuessViewModel = viewModel()) {
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(50)
         ) {
-            Text("Submit")
+            Text(stringResource(R.string.guess_screen_button_submit))
         }
 
         // attempts left
         Text(
-            text = "Attempts left: $triesLeft",
+            text = stringResource(R.string.guess_screen_attempts_left, triesLeft),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.secondary
         )
@@ -150,7 +152,7 @@ fun GuessScreen(viewModel: GuessViewModel = viewModel()) {
         // result
         if (showResult) {
             Text(
-                text = "Correct! It's ${pokemon!!.name}!",
+                text = stringResource(R.string.guess_screen_successful_guess, pokemon.name),
                 color = MaterialTheme.colorScheme.primary,
                 fontSize = 26.sp,
                 fontWeight = FontWeight.Bold

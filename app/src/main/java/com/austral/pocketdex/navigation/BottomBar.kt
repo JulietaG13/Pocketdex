@@ -19,16 +19,31 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 
 @Composable
 fun BottomBar(
     onNavigate: (String) -> Unit,
 ) {
-    val homeTab = TabBarItem(title = PocketdexScreen.Home.name, selectedIcon = Icons.Filled.Home, unselectedIcon = Icons.Outlined.Home)
-    val rankingTab = TabBarItem(title = PocketdexScreen.Guess.name, selectedIcon = Icons.Filled.PlayArrow, unselectedIcon = Icons.Outlined.PlayArrow)
-    val profileTab = TabBarItem(title = PocketdexScreen.Dex.name, selectedIcon = Icons.Filled.Search, unselectedIcon = Icons.Outlined.Search)
+    val homeTab = TabBarItem(
+        title = stringResource(PocketdexScreen.Home.labelId),
+        selectedIcon = Icons.Filled.Home,
+        unselectedIcon = Icons.Outlined.Home
+    )
 
-    val tabBarItems = listOf(homeTab, rankingTab, profileTab)
+    val guessTab = TabBarItem(
+        title = stringResource(PocketdexScreen.Guess.labelId),
+        selectedIcon = Icons.Filled.PlayArrow,
+        unselectedIcon = Icons.Outlined.PlayArrow
+    )
+
+    val dexTab = TabBarItem(
+        title = stringResource(PocketdexScreen.Dex.labelId),
+        selectedIcon = Icons.Filled.Search,
+        unselectedIcon = Icons.Outlined.Search
+    )
+
+    val tabBarItems = listOf(homeTab, guessTab, dexTab)
 
     TabView(tabBarItems, onNavigate)
 }

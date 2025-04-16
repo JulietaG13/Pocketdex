@@ -8,7 +8,20 @@
     <!-- $.flavor_text_entries[#].flavor_text  at language.name="en" and version="y"? -->
     <string name="characteristics_url">https://pokeapi.co/api/v2/pokemon-species/%1$d/</string>
 
+    <string name="navigation_bottom_bar_home">Home</string>
+    <string name="navigation_bottom_bar_guess">Guess</string>
+    <string name="navigation_bottom_bar_dex">Dex</string>
+
     <string name="dex_screen_top_bar_toggle_found">Found</string>
     <string name="dex_screen_top_bar_toggle_all">All</string>
+
+    <string name="home_screen_found_pokemon">Found: %1$d/%2$d</string>
+
+    <string name="guess_screen_placeholder_whos_that_pokemon">Who\'s that Pokémon?</string>
+    <string name="guess_screen_successful_guess">Correct! It\'s %1$s!</string>
+    <string name="guess_screen_attempts_left">Attempts left: %1$d</string>
+    <string name="guess_screen_button_submit">Submit</string>
+
+    <string name="sprite_image_content_description">Sprite of pokemon #%1$d</string>
 
 </resources>

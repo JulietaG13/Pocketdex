@@ -28,7 +28,7 @@ fun Sprite(
 
     AsyncImage(
         model = stringResource(R.string.sprite_url, pokemon.id),
-        contentDescription = "sprite of pokemon #${pokemon.id}",
+        contentDescription = stringResource(R.string.sprite_image_content_description, pokemon.id),
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)
