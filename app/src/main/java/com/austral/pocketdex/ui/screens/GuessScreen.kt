@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -31,23 +32,21 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
 import com.austral.pocketdex.util.MockData
 import com.austral.pocketdex.util.MockPokemonApi
+import com.austral.pocketdex.viewmodel.GuessViewModel
 import kotlin.random.Random
 
 @Composable
-fun GuessScreen() {
-    var guess by remember { mutableStateOf("") }
-    var id by remember { mutableIntStateOf(MockData.pokemonList.random().id /*Random.nextInt(1, 1025 + 1)*/) }
-    var triesLeft by remember { mutableIntStateOf(3) }
-    var revealedHints by remember { mutableStateOf(emptyList<String>()) }
-    var showResult by remember { mutableStateOf(false) }
-
-    val pokemon = MockPokemonApi().getPokemonById(id)   // TODO
-
-    val clues = listOf("It's a Water-type!", "It evolves at level 16.") // TODO
+fun GuessScreen(viewModel: GuessViewModel = viewModel()) {
+    val guess by viewModel.guess.collectAsState()
+    val pokemon by viewModel.pokemon.collectAsState()
+    val triesLeft by viewModel.triesLeft.collectAsState()
+    val revealedHints by viewModel.revealedHints.collectAsState()
+    val showResult by viewModel.showResult.collectAsState()
 
     Column(
         modifier = Modifier
@@ -74,7 +73,7 @@ fun GuessScreen() {
         ) {
 
             Sprite(
-                pokemon = pokemon!!,
+                pokemon = pokemon,
                 hidden = !showResult
             )
         }
@@ -82,7 +81,7 @@ fun GuessScreen() {
         // input field
         TextField(
             value = guess,
-            onValueChange = { guess = it },
+            onValueChange = { viewModel.onGuessChanged(it) },
             placeholder = {
                 Text(
                     "Who's that Pokémon?",
@@ -116,18 +115,7 @@ fun GuessScreen() {
 
         // submit
         Button(
-            onClick = {
-                if (guess.isNotBlank() && triesLeft > 0) {
-                    if (guess.lowercase() == pokemon!!.name.lowercase()) {
-                        showResult = true
-                    } else {
-                        triesLeft--
-                        if (triesLeft <= 2 && revealedHints.size < clues.size) {
-                            revealedHints = revealedHints + clues[revealedHints.size]
-                        }
-                    }
-                }
-            },
+            onClick = { viewModel.onCheckGuess() },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(50)
         ) {
@@ -168,5 +156,16 @@ fun GuessScreen() {
                 fontWeight = FontWeight.Bold
             )
         }
+
+        //reset game
+
+        /*
+        Button(
+            onClick = { viewModel.onResetGame() },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Reset game")
+        }
+        */
     }
 }

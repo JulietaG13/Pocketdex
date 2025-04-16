@@ -9,34 +9,32 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
-import com.austral.pocketdex.data.model.Pokemon
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.austral.pocketdex.ui.components.DexTopBar
 import com.austral.pocketdex.ui.components.MovingDiagonalBackground
 import com.austral.pocketdex.ui.components.PokeCardDialog
 import com.austral.pocketdex.ui.components.PokeListItem
 import com.austral.pocketdex.ui.theme.Dimensions
-import com.austral.pocketdex.util.MockData
+import com.austral.pocketdex.viewmodel.DexViewModel
 
 @Composable
-fun DexScreen() {
+fun DexScreen(viewModel: DexViewModel = viewModel()) {
 
-    val pokemons = MockData.pokemonList.sortedBy { it.id }
+    val pokemons by viewModel.pokemons.collectAsState()
+    val foundPokemonIds by viewModel.foundPokemonIds.collectAsState()
+    val showDialogCard by viewModel.showDialogCard.collectAsState()
+    val pokemonClicked by viewModel.pokemonClicked.collectAsState()
+    val showAll by viewModel.showAll.collectAsState()
 
-    var showDialogCard by remember { mutableStateOf(false) }
-    var pokemonClicked: Pokemon by remember { mutableStateOf(Pokemon.EMPTY) }
-    var showAll by remember { mutableStateOf(false) }
-
-    var foundPokemonIds by remember { mutableStateOf(setOf<Int>()) }
-
-    LaunchedEffect(Unit) {
-        foundPokemonIds = listOf(1, 2, 3, 10, 11, 13, 15, 16, 17, 28, 39, 84, 113, 700).toSet()
+    if (showDialogCard) {
+        PokeCardDialog(
+            pokemon = pokemonClicked,
+            onDismiss = { viewModel.onDismissDialog() }
+        )
     }
 
     Column(
@@ -46,7 +44,7 @@ fun DexScreen() {
 
         DexTopBar(
             showAll = showAll,
-            onToggle = {showAll = it},
+            onToggle = {  viewModel.onToggleShowAll() },
             modifier = Modifier.zIndex(1f)
         )
 
@@ -68,26 +66,18 @@ fun DexScreen() {
                 verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding)
             ) {
                 items(pokemons) { pokemon ->
-                    val found = showAll || pokemon.id in foundPokemonIds
+                    val found = showAll || pokemon.id in foundPokemonIds    // TODO(check)
                     PokeListItem(
                         pokemon = pokemon,
                         found = found,
                         onClick = {
                             if (found) {
-                                pokemonClicked = pokemon
-                                showDialogCard = true
+                                viewModel.onPokemonClicked(pokemon)
                             }
                         }
                     );
                 }
             }
         }
-    }
-
-    if (showDialogCard) {
-        PokeCardDialog(
-            pokemon = pokemonClicked,
-            onDismiss = { showDialogCard = false }
-        )
     }
 }
