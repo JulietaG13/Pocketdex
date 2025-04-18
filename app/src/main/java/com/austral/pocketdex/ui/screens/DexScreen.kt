@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -19,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.austral.pocketdex.ui.components.DexTopBar
 import com.austral.pocketdex.ui.components.MovingDiagonalBackground
 import com.austral.pocketdex.ui.components.PokeCardDialog
@@ -28,8 +25,7 @@ import com.austral.pocketdex.ui.theme.Dimensions
 import com.austral.pocketdex.viewmodel.DexViewModel
 
 @Composable
-fun DexScreen(viewModel: DexViewModel = viewModel()) {
-
+fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
     val pokemons by viewModel.pokemons.collectAsState()
     val foundPokemonIds by viewModel.foundPokemonIds.collectAsState()
     val showDialogCard by viewModel.showDialogCard.collectAsState()

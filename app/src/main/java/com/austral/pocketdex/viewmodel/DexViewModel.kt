@@ -1,10 +1,13 @@
 package com.austral.pocketdex.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.austral.pocketdex.data.model.Pokemon
+import com.austral.pocketdex.data.repository.PokemonRepository
 import com.austral.pocketdex.util.MockData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +15,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DexViewModel @Inject constructor() : ViewModel() {
+class DexViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val repository: PokemonRepository
+) : ViewModel() {
 
     private val _pokemons = MutableStateFlow<List<Pokemon>>(emptyList())
     val pokemons: StateFlow<List<Pokemon>> = _pokemons.asStateFlow()
@@ -38,8 +44,16 @@ class DexViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onPokemonClicked(pokemon: Pokemon) {
-        _pokemonClicked.value = pokemon
-        _showDialogCard.value = true
+        repository.getPokemonById(
+            id = pokemon.id,
+            context = context,
+            onSuccess = { pokemon ->
+                _pokemonClicked.value = pokemon
+                _showDialogCard.value = true
+            },
+            onFail = {},
+            loadingFinished = {}
+        )
     }
 
     fun onDismissDialog() {

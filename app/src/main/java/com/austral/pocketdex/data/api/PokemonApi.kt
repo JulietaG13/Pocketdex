@@ -1,7 +1,14 @@
 package com.austral.pocketdex.data.api
 
-import com.austral.pocketdex.data.model.Pokemon
+import retrofit.Call
+import retrofit.http.GET
+import retrofit.http.Path
 
 interface PokemonApi {
-    fun getPokemonById(id: Int): Pokemon?
+
+    @GET("pokemon/{id}")
+    fun getPokemonById(@Path("id") id: Int): Call<PokemonData>
+
+    @GET("pokemon-species/{id}")
+    fun getSpeciesById(@Path("id") id: Int): Call<SpeciesData>
 }

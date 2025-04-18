@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="sprite_url">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/%1$d.png</string>
+
+    <string name="base_url">https://pokeapi.co/api/v2/</string>
+
+    <!-- $.name -->
+    <string name="color_url">https://pokeapi.co/api/v2/pokemon-color/%1$d/</string>
+
+</resources>

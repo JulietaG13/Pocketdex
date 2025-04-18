@@ -17,10 +17,6 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,17 +29,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.austral.pocketdex.R
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
-import com.austral.pocketdex.util.MockData
-import com.austral.pocketdex.util.MockPokemonApi
 import com.austral.pocketdex.viewmodel.GuessViewModel
-import kotlin.random.Random
 
 @Composable
-fun GuessScreen(viewModel: GuessViewModel = viewModel()) {
+fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
     val guess by viewModel.guess.collectAsState()
     val pokemon by viewModel.pokemon.collectAsState()
     val triesLeft by viewModel.triesLeft.collectAsState()

@@ -1,12 +1,5 @@
 <resources>
     <string name="app_name">Pocketdex</string>
-    <string name="sprite_url">https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/%1$d.png</string>
-
-    <!-- $.name -->
-    <string name="color_url">https://pokeapi.co/api/v2/pokemon-color/%1$d/</string>
-
-    <!-- $.flavor_text_entries[#].flavor_text  at language.name="en" and version="y"? -->
-    <string name="characteristics_url">https://pokeapi.co/api/v2/pokemon-species/%1$d/</string>
 
     <string name="navigation_bottom_bar_home">Home</string>
     <string name="navigation_bottom_bar_guess">Guess</string>
@@ -24,4 +17,5 @@
 
     <string name="sprite_image_content_description">Sprite of pokemon #%1$d</string>
 
+    <string name="api_language">en</string>
 </resources>

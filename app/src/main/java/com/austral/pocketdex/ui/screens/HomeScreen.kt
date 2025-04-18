@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.austral.pocketdex.R
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.components.MovingPokeballBackground
@@ -31,7 +31,7 @@ import com.austral.pocketdex.ui.theme.Dimensions
 import com.austral.pocketdex.viewmodel.HomeViewModel
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
 
     val found by viewModel.found.collectAsState()
     val total = viewModel.total
