@@ -11,7 +11,7 @@ class PokemonMapper @Inject constructor() {
     fun toPokemon(context: Context, pokemonData: PokemonData, speciesData: SpeciesData): Pokemon {
         return Pokemon(
             id = pokemonData.id,
-            name = pokemonData.name,
+            name = pokemonData.name.title(),
             type = pokemonData.types.map { toPokemonType(it.type) },
             height = pokemonData.height,
             description = toDescription(context, speciesData.flavorTextEntries)
@@ -36,4 +36,6 @@ class PokemonMapper @Inject constructor() {
             .replace("\n", " ")
             .replace("POKéMON", "pokémon")  // TODO(extract?)
     }
+
+    fun String.title(): String = split(" ").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercaseChar) }
 }
