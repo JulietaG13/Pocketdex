@@ -39,7 +39,7 @@ class DexViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _pokemons.value = MockData.pokemonList.sortedBy { it.id }
-            _foundPokemonIds.value = listOf(1, 2, 3, 10, 11, 13, 15, 16, 17, 28, 39, 84, 113, 700).toSet()
+            _foundPokemonIds.value = repository.getFoundPokemonsIds(context).toSet()
         }
     }
 

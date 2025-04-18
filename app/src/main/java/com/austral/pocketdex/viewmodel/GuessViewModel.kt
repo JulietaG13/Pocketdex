@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.util.MockData
 import com.austral.pocketdex.util.MockPokemonApi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class GuessViewModel @Inject constructor() : ViewModel() {
 
     private val _pokemon = MutableStateFlow<Pokemon>(Pokemon.EMPTY)

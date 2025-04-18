@@ -4,6 +4,7 @@ import android.content.Context
 import com.austral.pocketdex.data.api.PokemonApiImpl
 import com.austral.pocketdex.data.api.PokemonMapper
 import com.austral.pocketdex.data.model.Pokemon
+import com.austral.pocketdex.util.MockData
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
@@ -35,5 +36,9 @@ class PokemonRepository @Inject constructor(
             onFail = onFail,
             loadingFinished = loadingFinished
         )
+    }
+
+    fun getFoundPokemonsIds(context: Context): List<Int> {
+        return listOf(1, 2, 3, 10, 11, 13, 15, 16, 17, 28, 39, 84, 113, 700)
     }
 }
