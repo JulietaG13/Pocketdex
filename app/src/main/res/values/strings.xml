@@ -11,9 +11,12 @@
     <string name="home_screen_found_pokemon">Found: %1$d/%2$d</string>
 
     <string name="guess_screen_placeholder_whos_that_pokemon">Who\'s that Pokémon?</string>
-    <string name="guess_screen_successful_guess">Correct! It\'s %1$s!</string>
     <string name="guess_screen_attempts_left">Attempts left: %1$d</string>
     <string name="guess_screen_button_submit">Submit</string>
+    <string name="guess_screen_successful_guess">Correct! It\'s %1$s!</string>
+    <string name="guess_screen_button_next">Next</string>
+    <string name="guess_screen_failure_message">Oh no! You ran out of tries 😢</string>
+    <string name="guess_screen_button_try_again">Try Again</string>
 
     <string name="sprite_image_content_description">Sprite of pokemon #%1$d</string>
 

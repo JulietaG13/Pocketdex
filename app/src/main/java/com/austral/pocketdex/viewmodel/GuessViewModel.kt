@@ -6,8 +6,11 @@ import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.util.MockData
 import com.austral.pocketdex.util.MockPokemonApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,8 +29,20 @@ class GuessViewModel @Inject constructor() : ViewModel() {
     private val _revealedHints = MutableStateFlow(emptyList<String>())
     val revealedHints: StateFlow<List<String>> = _revealedHints.asStateFlow()
 
-    private val _showResult = MutableStateFlow(false)
-    val showResult: StateFlow<Boolean> = _showResult.asStateFlow()
+    private val _showSuccess = MutableStateFlow(false)
+    val showSuccess: StateFlow<Boolean> = _showSuccess.asStateFlow()
+
+    private val _showFailure = MutableStateFlow(false)
+    val showFailure: StateFlow<Boolean> = _showFailure.asStateFlow()
+
+    val running: StateFlow<Boolean> = combine(showSuccess, showFailure) { success, failure ->
+        !success && !failure
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = true
+    )
+
 
     private val clues = listOf(
         "It's a Water-type!",
@@ -47,10 +62,14 @@ class GuessViewModel @Inject constructor() : ViewModel() {
     fun onCheckGuess() {
         if (_guess.value.isNotBlank() && _triesLeft.value > 0) {
             if (_guess.value.lowercase().trim() == _pokemon.value.name.lowercase()) {
-                _showResult.value = true
-            } else {
-                _triesLeft.value--
+                _showSuccess.value = true
+                return
+            }
+            _triesLeft.value--
+            if (_triesLeft.value > 0) {
                 _revealedHints.value += clues[_revealedHints.value.size]
+            } else {
+                _showFailure.value = true
             }
         }
     }
@@ -59,7 +78,8 @@ class GuessViewModel @Inject constructor() : ViewModel() {
         _guess.value = ""
         _triesLeft.value = 3
         _revealedHints.value = emptyList()
-        _showResult.value = false
+        _showSuccess.value = false
+        _showFailure.value = false
         viewModelScope.launch {
             _pokemon.value = MockPokemonApi().getPokemonById(MockData.pokemonList.random().id)?:Pokemon.EMPTY
         }
