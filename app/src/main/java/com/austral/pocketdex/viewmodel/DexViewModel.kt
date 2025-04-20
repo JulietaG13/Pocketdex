@@ -116,6 +116,10 @@ class DexViewModel @Inject constructor(
         _showAll.value = !_showAll.value
     }
 
+    fun setShowAll(value: Boolean) {
+        _showAll.value = value
+    }
+
     fun onFail(message: String) {
         _failureMessage.value = message
     }
