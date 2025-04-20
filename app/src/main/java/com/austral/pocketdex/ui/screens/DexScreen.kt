@@ -9,17 +9,22 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +51,7 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
     val showAll by viewModel.showAll.collectAsState()
 
     val errorMessage by viewModel.errorMessage.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val screenHeightDp = configuration.screenHeightDp.dp
@@ -112,32 +118,51 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
                 modifier = Modifier.zIndex(-1f)
             )
 
-            LazyVerticalGrid(
-                state = gridState,
-                columns = GridCells.Adaptive(Dimensions.MinSpriteSize),
+            Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = Dimensions.LargePadding)
-                    .zIndex(0f),
-                horizontalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
-                verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
-                contentPadding = PaddingValues(
-                    top = Dimensions.LargePadding,
-                    bottom = screenHeightDp / 2
-                )
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                LazyVerticalGrid(
+                    state = gridState,
+                    columns = GridCells.Adaptive(Dimensions.MinSpriteSize),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = Dimensions.LargePadding)
+                        .zIndex(0f),
+                    horizontalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
+                    verticalArrangement = Arrangement.spacedBy(Dimensions.MediumPadding),
+                    contentPadding = PaddingValues(
+                        top = Dimensions.LargePadding,
+                        bottom = screenHeightDp / 2
+                    )
+                ) {
 
-                items(pokemons) { pokemon ->
-                    val found = showAll || pokemon.id in foundPokemonIds
-                    PokeListItem(
-                        pokemon = pokemon,
-                        found = found,
-                        onClick = {
-                            if (found) {
-                                viewModel.onPokemonClicked(pokemon)
+                    items(pokemons) { pokemon ->
+                        val found = showAll || pokemon.id in foundPokemonIds
+                        PokeListItem(
+                            pokemon = pokemon,
+                            found = found,
+                            onClick = {
+                                if (found) {
+                                    viewModel.onPokemonClicked(pokemon)
+                                }
                             }
+                        );
+                    }
+
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(Dimensions.LargePadding)
+                                .alpha(alpha = if (isLoading) 1f else 0f)
+                                .zIndex(1f),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
                         }
-                    );
+                    }
                 }
             }
         }
