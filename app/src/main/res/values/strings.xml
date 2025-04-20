@@ -20,5 +20,9 @@
 
     <string name="sprite_image_content_description">Sprite of pokemon #%1$d</string>
 
+    <string name="failure_message_pokemon_not_found">Pokemon not found</string>
+    <string name="failure_message_could_not_load_pokemon_list">Can\'t load pokemon list</string>
+    <string name="failure_message_no_more_pokemons_found">There are no more pokemons left to find</string>
+
     <string name="api_language">en</string>
 </resources>

@@ -18,6 +18,26 @@ class PokemonMapper @Inject constructor() {
         )
     }
 
+    fun toPokemon(context: Context, pokemonData: PokemonData): Pokemon {
+        return Pokemon(
+            id = pokemonData.id,
+            name = pokemonData.name.title(),
+            type = pokemonData.types.map { toPokemonType(it.type) },
+            height = pokemonData.height,
+            description = ""
+        )
+    }
+
+    fun toPokemon(context: Context, pokemon: Pokemon, speciesData: SpeciesData): Pokemon {
+        return Pokemon(
+            id = pokemon.id,
+            name = pokemon.name,
+            type = pokemon.type,
+            height = pokemon.height,
+            description = toDescription(context, speciesData.flavorTextEntries)
+        )
+    }
+
     fun toPokemonType(type: PokemonTypeData): PokemonType {
         return PokemonType.fromString(type.name) ?: PokemonType.NORMAL  // TODO(handle)
     }
