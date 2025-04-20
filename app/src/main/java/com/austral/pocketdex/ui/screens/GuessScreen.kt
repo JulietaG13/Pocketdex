@@ -15,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -109,12 +110,17 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                     )
                     drawCircle(brush = gradient, radius = size.minDimension / 2f, center = center)
                 },
+            contentAlignment = Alignment.Center
         ) {
 
             Sprite(
                 pokemon = pokemon,
                 hidden = !showSuccess,
                 modifier = Modifier.alpha(if (isLoading) 0f else 1f)
+            )
+
+            CircularProgressIndicator(
+                modifier = Modifier.alpha(alpha = if (isLoading) 1f else 0f)
             )
         }
 
