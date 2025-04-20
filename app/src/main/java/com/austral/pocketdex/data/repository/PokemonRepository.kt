@@ -33,7 +33,7 @@ class PokemonRepository @Inject constructor(
                 )
             },
             onFail = onFail,
-            loadingFinished = loadingFinished
+            loadingFinished = {}
         )
     }
 
