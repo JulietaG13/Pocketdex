@@ -54,8 +54,17 @@ class PokemonMapper @Inject constructor() {
             .replace(" -\n", " - ")
             .replace("-\n", "-")
             .replace("\n", " ")
-            .replace("POKéMON", "pokémon")  // TODO(extract?)
+            .cleanUppercaseWords()
     }
 
     fun String.title(): String = split(" ").joinToString(" ") { it.lowercase().replaceFirstChar(Char::uppercaseChar) }
+
+    fun String.cleanUppercaseWords(): String =
+        split(" ").joinToString(" ") { word ->
+            if (word.any { it.isUpperCase() }) {
+                word.lowercase().replaceFirstChar(Char::uppercaseChar)
+            } else {
+                word
+            }
+        }
 }
