@@ -35,8 +35,8 @@ class DexViewModel @Inject constructor(
     private val _showAll = MutableStateFlow<Boolean>(false)
     val showAll: StateFlow<Boolean> = _showAll.asStateFlow()
 
-    private val _failureMessage = MutableStateFlow<String>("")
-    val failureMessage: StateFlow<String> = _failureMessage.asStateFlow()
+    private val _errorMessage = MutableStateFlow<String>("")
+    val errorMessage: StateFlow<String> = _errorMessage.asStateFlow()
 
     private val _isLoading = MutableStateFlow<Boolean>(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -65,7 +65,7 @@ class DexViewModel @Inject constructor(
                 _showDialogCard.value = true
             },
             onFail = {
-                onFail(context.getString(R.string.failure_message_pokemon_not_found))
+                onError(context.getString(R.string.failure_message_pokemon_not_found))
             },
             loadingFinished = {
                 _isLoading.value = false
@@ -86,7 +86,7 @@ class DexViewModel @Inject constructor(
                 to = maxPokemons
             } else {
                 _isLoading.value = false
-                onFail(context.getString(R.string.failure_message_no_more_pokemons_found))
+                onError(context.getString(R.string.failure_message_no_more_pokemons_found))
                 return
             }
         }
@@ -100,7 +100,7 @@ class DexViewModel @Inject constructor(
                 loadedUntilId = to
             },
             onFail = {
-                onFail(context.getString(R.string.failure_message_could_not_load_pokemon_list))
+                onError(context.getString(R.string.failure_message_could_not_load_pokemon_list))
             },
             loadingFinished = {
                 _isLoading.value = false
@@ -120,11 +120,11 @@ class DexViewModel @Inject constructor(
         _showAll.value = value
     }
 
-    fun onFail(message: String) {
-        _failureMessage.value = message
+    fun onError(message: String) {
+        _errorMessage.value = message
     }
 
     fun clearFailureMessage() {
-        _failureMessage.value = ""
+        _errorMessage.value = ""
     }
 }
