@@ -56,13 +56,6 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
     val configuration = LocalConfiguration.current
     val screenHeightDp = configuration.screenHeightDp.dp
 
-    if (showDialogCard) {
-        PokeCardDialog(
-            pokemon = pokemonClicked,
-            onDismiss = { viewModel.onDismissDialog() }
-        )
-    }
-
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotBlank()) {
             Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
@@ -81,6 +74,14 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
                     viewModel.loadMorePokemons()
                 }
             }
+    }
+
+    if (showDialogCard) {
+        PokeCardDialog(
+            context = context,
+            pokemon = pokemonClicked,
+            onDismiss = { viewModel.onDismissDialog() }
+        )
     }
 
     Column(

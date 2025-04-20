@@ -1,5 +1,6 @@
 package com.austral.pocketdex.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -35,6 +36,7 @@ import com.austral.pocketdex.ui.theme.pokeCardId
 
 @Composable
 fun PokeCardDialog(
+    context: Context,
     pokemon: Pokemon,
     onDismiss: () -> Unit
 ) {
@@ -54,7 +56,7 @@ fun PokeCardDialog(
                     .fillMaxWidth()
                     .aspectRatio(0.75f)
                     .clickable(onClick = onDismiss)
-                    .shadow(8.dp, RoundedCornerShape(Dimensions.RoundedCorner))
+                    .shadow(8.dp, RoundedCornerShape(Dimensions.RoundedCorner))     // TODO(extract dp)
                     .border(
                         width = 14.dp,
                         brush = shimmerBorderBrush(),
@@ -124,7 +126,7 @@ fun PokeCardDialog(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         pokemon.type.forEach { type ->
-                            PokemonTypeBadge(type)
+                            PokemonTypeBadge(context, type)
                         }
                     }
 

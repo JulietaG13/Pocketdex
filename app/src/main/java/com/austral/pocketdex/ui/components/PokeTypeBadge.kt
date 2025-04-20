@@ -1,5 +1,6 @@
 package com.austral.pocketdex.ui.components
 
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -13,9 +14,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.austral.pocketdex.data.model.PokemonType
+import java.util.Locale
 
 @Composable
-fun PokemonTypeBadge(type: PokemonType) {
+fun PokemonTypeBadge(   // TODO(extract dp)
+    context: Context,
+    type: PokemonType
+) {
     Box(
         modifier = Modifier
             .padding(4.dp)
@@ -24,7 +29,7 @@ fun PokemonTypeBadge(type: PokemonType) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = type.name,
+            text = type.getLocalizedName(context).uppercase(Locale.ROOT),
             style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Bold),
             color = Color.White
         )
