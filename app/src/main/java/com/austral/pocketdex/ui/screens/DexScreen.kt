@@ -44,8 +44,8 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
     val showDialogCard by viewModel.showDialogCard.collectAsState()
     val pokemonClicked by viewModel.pokemonClicked.collectAsState()
     val showAll by viewModel.showAll.collectAsState()
-    val failureMessage by viewModel.errorMessage.collectAsState()
 
+    val errorMessage by viewModel.errorMessage.collectAsState()
     val context = LocalContext.current
     val configuration = LocalConfiguration.current
     val screenHeightDp = configuration.screenHeightDp.dp
@@ -57,9 +57,9 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
         )
     }
 
-    LaunchedEffect(failureMessage) {
-        if (failureMessage.isNotBlank()) {
-            Toast.makeText(context, failureMessage, Toast.LENGTH_SHORT).show()
+    LaunchedEffect(errorMessage) {
+        if (errorMessage.isNotBlank()) {
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
             viewModel.clearFailureMessage()
         }
     }
