@@ -1,11 +1,14 @@
 package com.austral.pocketdex.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.austral.pocketdex.R
 import com.austral.pocketdex.data.model.Pokemon
-import com.austral.pocketdex.util.MockData
+import com.austral.pocketdex.data.repository.PokemonRepository
 import com.austral.pocketdex.util.MockPokemonApi
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,9 +17,13 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
-class GuessViewModel @Inject constructor() : ViewModel() {
+class GuessViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val repository: PokemonRepository
+) : ViewModel() {
 
     private val _pokemon = MutableStateFlow<Pokemon>(Pokemon.EMPTY)
     val pokemon: StateFlow<Pokemon> = _pokemon.asStateFlow()
@@ -37,18 +44,26 @@ class GuessViewModel @Inject constructor() : ViewModel() {
     private val _showFailure = MutableStateFlow(false)
     val showFailure: StateFlow<Boolean> = _showFailure.asStateFlow()
 
-    val running: StateFlow<Boolean> = combine(showSuccess, showFailure) { success, failure ->
-        !success && !failure
+    private val _errorMessage = MutableStateFlow<String>("")
+    val errorMessage: StateFlow<String> = _errorMessage.asStateFlow()
+
+    private val _isError = MutableStateFlow<Boolean>(false)
+    val isError: StateFlow<Boolean> = _isError.asStateFlow()
+
+    private val _isLoading = MutableStateFlow<Boolean>(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    val running: StateFlow<Boolean> = combine(showSuccess, showFailure, isError) { success, failure, isError ->
+        !success && !failure && !isError
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = true
     )
 
-
-    private val clues = listOf(
-        "It's a Water-type!",
-        "It evolves at level 16."
+    private var clues = listOf(
+        "",
+        ""
     )
 
     init {
@@ -82,8 +97,66 @@ class GuessViewModel @Inject constructor() : ViewModel() {
         _revealedHints.value = emptyList()
         _showSuccess.value = false
         _showFailure.value = false
+        _isError.value = false
+
         viewModelScope.launch {
-            _pokemon.value = MockPokemonApi().getPokemonById(MockData.pokemonList.random().id)?:Pokemon.EMPTY
+            _isLoading.value = true
+            getPokemonById(Random.nextInt(1, 700))    // 1025 + 1
         }
+    }
+
+    fun getPokemonById(id: Int) {
+        _isLoading.value = true
+        repository.getPokemonByIdNoDescription(
+            id = id,
+            context = context,
+            onSuccess = { poke ->
+                _pokemon.value = poke
+                setClues(poke)
+            },
+            onFail = {
+                _pokemon.value = Pokemon.EMPTY
+                onError(context.getString(R.string.failure_message_pokemon_not_found))
+            },
+            loadingFinished = {
+                _isLoading.value = false
+            }
+        )
+    }
+
+    fun setClues(pokemon: Pokemon) {
+        val typeClue = when (pokemon.type.size) {
+            1 -> {
+                val (type) = pokemon.type
+                context.getString(
+                    R.string.guess_screen_clue_pokemon_type_one,
+                    type.getLocalizedName(context)
+                )
+            }
+            2 -> {
+                val (firstType, secondType) = pokemon.type
+                context.getString(
+                    R.string.guess_screen_clue_pokemon_type_two,
+                    firstType.getLocalizedName(context),
+                    secondType.getLocalizedName(context)
+                )
+            }
+            else -> context.getString(R.string.guess_screen_clue_error_1)
+        }
+
+        val firstLetterClue = pokemon.name.firstOrNull()?.let {
+            context.getString(R.string.guess_screen_clue_first_letter_of_name, it)
+        } ?: context.getString(R.string.guess_screen_clue_error_2)
+
+        clues = listOf(typeClue, firstLetterClue)
+    }
+
+    fun onError(message: String) {
+        _errorMessage.value = message
+        _isError.value = true
+    }
+
+    fun clearFailureMessage() {
+        _errorMessage.value = ""
     }
 }

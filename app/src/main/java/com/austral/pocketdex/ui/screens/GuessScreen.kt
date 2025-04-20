@@ -1,5 +1,6 @@
 package com.austral.pocketdex.ui.screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,10 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
@@ -45,6 +48,9 @@ import com.austral.pocketdex.viewmodel.GuessViewModel
 
 @Composable
 fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
+
+    val TAG: String = "GuessScreen"
+
     val guess by viewModel.guess.collectAsState()
     val pokemon by viewModel.pokemon.collectAsState()
     val triesLeft by viewModel.triesLeft.collectAsState()
@@ -52,6 +58,9 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
     val showSuccess by viewModel.showSuccess.collectAsState()
     val showFailure by viewModel.showFailure.collectAsState()
     val isGameRunning by viewModel.running.collectAsState()
+
+    val errorMessage by viewModel.errorMessage.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     /* DEBUG */
     val context = LocalContext.current
@@ -69,6 +78,14 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
         )
     }
     /* END DEBUG */
+
+    LaunchedEffect(errorMessage) {
+        if (errorMessage.isNotBlank()) {
+            Log.e(TAG, "Error message: $errorMessage")
+            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+            viewModel.clearFailureMessage()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -96,7 +113,8 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
 
             Sprite(
                 pokemon = pokemon,
-                hidden = !showSuccess
+                hidden = !showSuccess,
+                modifier = Modifier.alpha(if (isLoading) 0f else 1f)
             )
         }
 
@@ -140,7 +158,8 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
             Button(
                 onClick = { viewModel.onCheckGuess() },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(50)
+                shape = RoundedCornerShape(50),
+                enabled = !isLoading
             ) {
                 Text(stringResource(R.string.guess_screen_button_submit))
             }
