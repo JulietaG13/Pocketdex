@@ -17,6 +17,11 @@
     <string name="guess_screen_button_next">Next</string>
     <string name="guess_screen_failure_message">Oh no! You ran out of tries 😢</string>
     <string name="guess_screen_button_try_again">Try Again</string>
+    <string name="guess_screen_clue_pokemon_type_one">It\'s a %1$s-type!</string>
+    <string name="guess_screen_clue_pokemon_type_two">It\'s a %1$s-type and %2$s-type!</string>
+    <string name="guess_screen_clue_first_letter_of_name">It starts with %1$s</string>
+    <string name="guess_screen_clue_error_1">Sorry, no clue</string>
+    <string name="guess_screen_clue_error_2">You are alone on this one</string>
 
     <string name="sprite_image_content_description">Sprite of pokemon #%1$d</string>
 
@@ -25,4 +30,24 @@
     <string name="failure_message_no_more_pokemons_found">There are no more pokemons left to find</string>
 
     <string name="api_language">en</string>
+
+    <string name="pokemon_type_normal">Normal</string>
+    <string name="pokemon_type_fire">Fire</string>
+    <string name="pokemon_type_water">Water</string>
+    <string name="pokemon_type_electric">Electric</string>
+    <string name="pokemon_type_grass">Grass</string>
+    <string name="pokemon_type_ice">Ice</string>
+    <string name="pokemon_type_fighting">Fighting</string>
+    <string name="pokemon_type_poison">Poison</string>
+    <string name="pokemon_type_ground">Ground</string>
+    <string name="pokemon_type_flying">Flying</string>
+    <string name="pokemon_type_psychic">Psychic</string>
+    <string name="pokemon_type_bug">Bug</string>
+    <string name="pokemon_type_rock">Rock</string>
+    <string name="pokemon_type_ghost">Ghost</string>
+    <string name="pokemon_type_dragon">Dragon</string>
+    <string name="pokemon_type_dark">Dark</string>
+    <string name="pokemon_type_steel">Steel</string>
+    <string name="pokemon_type_fairy">Fairy</string>
+
 </resources>
