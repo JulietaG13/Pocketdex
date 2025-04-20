@@ -30,6 +30,8 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.zIndex
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.theme.Dimensions
+import com.austral.pocketdex.ui.theme.pokeCardDescription
+import com.austral.pocketdex.ui.theme.pokeCardId
 
 @Composable
 fun PokeCardDialog(
@@ -37,7 +39,7 @@ fun PokeCardDialog(
     onDismiss: () -> Unit
 ) {
 
-    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)
+    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)   // TODO(extract?)
 
     Dialog(onDismissRequest = { onDismiss() }) {
         Box(
@@ -98,6 +100,7 @@ fun PokeCardDialog(
                             .aspectRatio(1.8f)
                             .background(Color.White, shape = RoundedCornerShape(8.dp))
                     ) {
+
                         Column {
                             Spacer(
                                 modifier = Modifier
@@ -128,12 +131,39 @@ fun PokeCardDialog(
                     Spacer(modifier = Modifier.height(Dimensions.MediumPadding))
 
                     // Description
-                    Text(
-                        text = pokemon.description,
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(horizontal = Dimensions.MediumPadding)
-                    )
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxSize()
+                            .padding(horizontal = Dimensions.MediumPadding),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        AutoResizeText(
+                            text = pokemon.description,
+                            style = MaterialTheme.typography.pokeCardDescription,
+                            textAlign = TextAlign.Center,
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier.fillMaxSize(),
+                            minFontSize = MaterialTheme.typography.bodySmall.fontSize,
+                            maxFontSize = MaterialTheme.typography.pokeCardDescription.fontSize
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(Dimensions.MediumPadding))
+
+                    // Number
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Dimensions.MediumPadding),
+                        contentAlignment = Alignment.BottomEnd
+                    ) {
+                        Text(
+                            text = "# ${pokemon.id}",
+                            style = MaterialTheme.typography.pokeCardId,
+                            textAlign = TextAlign.Right
+                        )
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.austral.pocketdex.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -19,6 +20,21 @@ val fontName = GoogleFont("DM Sans")
 val fontFamily = FontFamily(
     Font(googleFont = fontName, fontProvider = provider)
 )
+
+val Typography.pokeCardId: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 24.sp,
+        letterSpacing = 2.sp,
+        color = Typography.titleLarge.color
+    )
+
+
+val Typography.pokeCardDescription: TextStyle
+    @Composable
+    get() = Typography.bodyMedium.copy(fontSize = 16.sp, lineHeight = 18.sp)
 
 val Typography = Typography(
 
