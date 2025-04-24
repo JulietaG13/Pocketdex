@@ -48,7 +48,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
     ) {
         Box(
             modifier = Modifier
-                .clip(RoundedCornerShape(Dimensions.RoundedCorner))
+                .clip(RoundedCornerShape(Dimensions.LargeRoundedCorner))
                 .background(Color.White.copy(alpha = 0.5f))
                 .padding(Dimensions.LargePadding * 3)
                 .padding(bottom = Dimensions.LargePadding * 3)
@@ -58,7 +58,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Box(
-                    modifier = Modifier.size(150.dp)
+                    modifier = Modifier.size(150.dp)    // TODO(extract)
                 ) {
                     Profile(
                         image = {

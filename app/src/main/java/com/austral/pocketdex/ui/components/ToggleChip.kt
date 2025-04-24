@@ -23,7 +23,7 @@ fun ToggleChip(
     onToggle: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(bottomStart = Dimensions.RoundedCorner, bottomEnd = Dimensions.RoundedCorner))
+            .clip(RoundedCornerShape(bottomStart = Dimensions.LargeRoundedCorner, bottomEnd = Dimensions.LargeRoundedCorner))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(Dimensions.SmallPadding),
         verticalAlignment = Alignment.CenterVertically

@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import com.austral.pocketdex.ui.theme.Dimensions
 
 
 @Composable
@@ -26,7 +25,7 @@ fun Profile(
         Box(
             modifier = Modifier
                 .clip(shape = CircleShape)
-                .border(4.dp, Color.Gray, CircleShape)
+                .border(Dimensions.ProfileBorderWidth, Color.Gray, CircleShape)
                 .background(Color.White)
                 .aspectRatio(1f)
         ) {

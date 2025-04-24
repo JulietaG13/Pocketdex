@@ -26,7 +26,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.zIndex
 import com.austral.pocketdex.data.model.Pokemon
@@ -41,7 +40,7 @@ fun PokeCardDialog(
     onDismiss: () -> Unit
 ) {
 
-    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)   // TODO(extract?)
+    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)   // TODO(extract)
 
     Dialog(onDismissRequest = { onDismiss() }) {
         Box(
@@ -50,22 +49,22 @@ fun PokeCardDialog(
             contentAlignment = Alignment.Center,
         ) {
             Card(
-                shape = RoundedCornerShape(Dimensions.RoundedCorner),
+                shape = RoundedCornerShape(Dimensions.LargeRoundedCorner),
                 colors = CardDefaults.cardColors(containerColor = containerColor),
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(0.75f)
                     .clickable(onClick = onDismiss)
-                    .shadow(8.dp, RoundedCornerShape(Dimensions.RoundedCorner))     // TODO(extract dp)
+                    .shadow(Dimensions.Shadow, RoundedCornerShape(Dimensions.LargeRoundedCorner))
                     .border(
-                        width = 14.dp,
+                        width = Dimensions.CardBorderWidth,
                         brush = shimmerBorderBrush(),
-                        shape = RoundedCornerShape(24.dp)
+                        shape = RoundedCornerShape(Dimensions.LargeRoundedCorner)
                     )
                     .border(
-                        width = 14.dp,
+                        width = Dimensions.CardBorderWidth,
                         brush = typeBorderBrush(pokemon.type),
-                        shape = RoundedCornerShape(24.dp)
+                        shape = RoundedCornerShape(Dimensions.LargeRoundedCorner)
                     )
                     .background(color = Color.White)
                     .padding(Dimensions.MediumPadding),
@@ -99,8 +98,8 @@ fun PokeCardDialog(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(1.8f)
-                            .background(Color.White, shape = RoundedCornerShape(8.dp))
+                            .aspectRatio(1.8f)      // TODO(extract)
+                            .background(Color.White, shape = RoundedCornerShape(Dimensions.SmallRoundedCorner))
                     ) {
 
                         Column {
@@ -112,7 +111,7 @@ fun PokeCardDialog(
                             Sprite(
                                 pokemon = pokemon,
                                 modifier = Modifier
-                                    .fillMaxWidth(0.9f)
+                                    .fillMaxWidth(0.9f)     //TODO(extract)
                                     .zIndex(-1f)
                             )
                         }

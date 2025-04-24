@@ -12,20 +12,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.austral.pocketdex.data.model.PokemonType
+import com.austral.pocketdex.ui.theme.Dimensions
 import java.util.Locale
 
 @Composable
-fun PokemonTypeBadge(   // TODO(extract dp)
+fun PokemonTypeBadge(
     context: Context,
     type: PokemonType
 ) {
     Box(
         modifier = Modifier
-            .padding(4.dp)
-            .background(type.color, shape = RoundedCornerShape(12.dp))
-            .padding(horizontal = 12.dp, vertical = 6.dp),
+            .padding(Dimensions.SmallPadding)
+            .background(type.color, shape = RoundedCornerShape(Dimensions.MediumRoundedCorner))
+            .padding(
+                horizontal = Dimensions.TypeBadgeHorizontalPadding,
+                vertical = Dimensions.TypeBadgeVerticalPadding
+            ),
         contentAlignment = Alignment.Center
     ) {
         Text(

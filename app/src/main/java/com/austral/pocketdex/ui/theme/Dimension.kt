@@ -13,7 +13,15 @@ object Dimensions {
 
     val MinSpriteSize = 80.dp
 
-    val CardBorder = 12.dp
-    val RoundedCorner = 24.dp
-    val SmallRoundedCorner = 12.dp
+    val CardBorderWidth = 14.dp
+    val ProfileBorderWidth = 4.dp
+
+    val SmallRoundedCorner = 8.dp
+    val MediumRoundedCorner = 12.dp
+    val LargeRoundedCorner = 24.dp
+
+    val Shadow = 8.dp
+
+    val TypeBadgeHorizontalPadding = 12.dp
+    val TypeBadgeVerticalPadding = TypeBadgeHorizontalPadding / 2
 }

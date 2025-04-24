@@ -145,9 +145,9 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = Dimensions.MediumPadding)
-                    .clip(RoundedCornerShape(Dimensions.SmallRoundedCorner)),
+                    .clip(RoundedCornerShape(Dimensions.MediumRoundedCorner)),
 
-                shape = RoundedCornerShape(Dimensions.SmallRoundedCorner),
+                shape = RoundedCornerShape(Dimensions.MediumRoundedCorner),
 
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
