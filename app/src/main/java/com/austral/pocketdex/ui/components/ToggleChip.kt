@@ -13,7 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import com.austral.pocketdex.ui.theme.Dimensions
+import com.austral.pocketdex.ui.theme.PocketdexTheme
 
 @Composable
 fun ToggleChip(
@@ -23,7 +25,12 @@ fun ToggleChip(
     onToggle: (Boolean) -> Unit) {
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(bottomStart = Dimensions.LargeRoundedCorner, bottomEnd = Dimensions.LargeRoundedCorner))
+            .clip(
+                RoundedCornerShape(
+                    bottomStart = Dimensions.LargeRoundedCorner,
+                    bottomEnd = Dimensions.LargeRoundedCorner
+                )
+            )
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .padding(Dimensions.SmallPadding),
         verticalAlignment = Alignment.CenterVertically
@@ -53,5 +60,18 @@ fun ToggleChip(
         ) {
             Text(rightOption)
         }
+    }
+}
+
+@Preview
+@Composable
+private fun ToggleChipPreview() {
+    PocketdexTheme {
+        ToggleChip(
+            leftOption = "left",
+            rightOption = "right",
+            selected = false,
+            onToggle = {}
+        )
     }
 }

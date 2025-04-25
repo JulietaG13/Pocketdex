@@ -78,7 +78,6 @@ fun DexScreen(viewModel: DexViewModel = hiltViewModel<DexViewModel>()) {
 
     if (showDialogCard) {
         PokeCardDialog(
-            context = context,
             pokemon = pokemonClicked,
             onDismiss = { viewModel.onDismissDialog() }
         )

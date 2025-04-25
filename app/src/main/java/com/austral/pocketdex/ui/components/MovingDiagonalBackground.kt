@@ -15,7 +15,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.austral.pocketdex.ui.theme.LocalExtendedColors
+import com.austral.pocketdex.ui.theme.PocketdexTheme
 
 @Composable
 fun MovingDiagonalBackground(modifier: Modifier = Modifier) {
@@ -56,5 +59,14 @@ fun MovingDiagonalBackground(modifier: Modifier = Modifier) {
                 strokeWidth = strokeWidth
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewScreenSizes
+@Composable
+private fun MovingDiagonalBackgroundPreview() {
+    PocketdexTheme {
+        MovingDiagonalBackground()
     }
 }

@@ -16,7 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import com.austral.pocketdex.R
+import com.austral.pocketdex.ui.theme.PocketdexTheme
 
 @Composable
 fun MovingPokeballBackground() {
@@ -61,5 +64,14 @@ fun MovingPokeballBackground() {
                 }
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@PreviewScreenSizes
+@Composable
+private fun MovingPokeballBackgroundPreview() {
+    PocketdexTheme {
+        MovingPokeballBackground()
     }
 }

@@ -24,18 +24,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.zIndex
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.ui.theme.Dimensions
 import com.austral.pocketdex.ui.theme.pokeCardDescription
 import com.austral.pocketdex.ui.theme.pokeCardId
+import com.austral.pocketdex.util.MockData
 
 @Composable
 fun PokeCardDialog(
-    context: Context,
     pokemon: Pokemon,
     onDismiss: () -> Unit
 ) {
@@ -99,7 +102,10 @@ fun PokeCardDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .aspectRatio(1.8f)      // TODO(extract)
-                            .background(Color.White, shape = RoundedCornerShape(Dimensions.SmallRoundedCorner))
+                            .background(
+                                Color.White,
+                                shape = RoundedCornerShape(Dimensions.SmallRoundedCorner)
+                            )
                     ) {
 
                         Column {
@@ -125,7 +131,7 @@ fun PokeCardDialog(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         pokemon.type.forEach { type ->
-                            PokemonTypeBadge(context, type)
+                            PokemonTypeBadge(type)
                         }
                     }
 
@@ -169,4 +175,13 @@ fun PokeCardDialog(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PokeCardDialogPreview() {
+    PokeCardDialog(
+        pokemon = MockData.sylveon,
+        onDismiss = {}
+    )
 }
