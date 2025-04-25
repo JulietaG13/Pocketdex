@@ -46,11 +46,7 @@ fun PokeCardDialog(
     val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)   // TODO(extract)
 
     Dialog(onDismissRequest = { onDismiss() }) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center,
-        ) {
+        Box(contentAlignment = Alignment.Center) {
             Card(
                 shape = RoundedCornerShape(Dimensions.LargeRoundedCorner),
                 colors = CardDefaults.cardColors(containerColor = containerColor),
