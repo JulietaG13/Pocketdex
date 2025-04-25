@@ -35,7 +35,6 @@ class PokemonApiImpl @Inject constructor() {
 
             override fun onFailure(t: Throwable?) {
                 Log.e(TAG, "Error: $t")
-                Toast.makeText(context, "Can't get pokemon", Toast.LENGTH_SHORT).show()
                 onFail()
                 loadingFinished()
             }
@@ -58,7 +57,7 @@ class PokemonApiImpl @Inject constructor() {
             }
 
             override fun onFailure(t: Throwable?) {
-                Toast.makeText(context, "Can't get species", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Error: $t")
                 onFail()
                 loadingFinished()
             }
