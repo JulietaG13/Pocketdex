@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import coil3.compose.AsyncImage
 import com.austral.pocketdex.R
 import com.austral.pocketdex.data.model.Pokemon
+import com.austral.pocketdex.ui.theme.Dimensions
 
 @Composable
 fun Sprite(
@@ -21,9 +22,9 @@ fun Sprite(
 ) {
 
     val scale = when {
-        pokemon.height > 15 -> 0.85f
-        pokemon.height > 9 -> 0.9f
-        else -> 1.0f
+        pokemon.height > 15 -> Dimensions.spriteScalingForLarge
+        pokemon.height > 9 -> Dimensions.spriteScalingForMedium
+        else -> Dimensions.spriteScalingForSmall
     }
 
     AsyncImage(

@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,7 +22,6 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.austral.pocketdex.R
 import com.austral.pocketdex.data.model.Pokemon
@@ -58,7 +59,9 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Box(
-                    modifier = Modifier.size(150.dp)    // TODO(extract)
+                    modifier = Modifier
+                        .fillMaxWidth(Dimensions.homeProfileAspectRatio)
+                        .aspectRatio(1f)
                 ) {
                     Profile(
                         image = {

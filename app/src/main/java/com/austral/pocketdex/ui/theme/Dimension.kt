@@ -24,4 +24,14 @@ object Dimensions {
 
     val TypeBadgeHorizontalPadding = 12.dp
     val TypeBadgeVerticalPadding = TypeBadgeHorizontalPadding / 2
+
+    val pokecardCardAspectRatio = 0.75f
+    val pokecardPokeBoxAspectRatio = 1.8f
+    val pokecardSpriteScale = 0.9f
+
+    val homeProfileAspectRatio = 0.4f
+
+    val spriteScalingForSmall = 1f
+    val spriteScalingForMedium = 0.9f
+    val spriteScalingForLarge = 0.85f
 }

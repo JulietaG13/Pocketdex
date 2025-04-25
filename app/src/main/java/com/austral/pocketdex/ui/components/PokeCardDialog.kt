@@ -1,6 +1,5 @@
 package com.austral.pocketdex.ui.components
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,11 +23,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.zIndex
 import com.austral.pocketdex.data.model.Pokemon
@@ -52,7 +49,7 @@ fun PokeCardDialog(
                 colors = CardDefaults.cardColors(containerColor = containerColor),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(0.75f)
+                    .aspectRatio(Dimensions.pokecardCardAspectRatio)
                     .clickable(onClick = onDismiss)
                     .shadow(Dimensions.Shadow, RoundedCornerShape(Dimensions.LargeRoundedCorner))
                     .border(
@@ -97,7 +94,7 @@ fun PokeCardDialog(
                         contentAlignment = Alignment.Center,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(1.8f)      // TODO(extract)
+                            .aspectRatio(Dimensions.pokecardPokeBoxAspectRatio)
                             .background(
                                 Color.White,
                                 shape = RoundedCornerShape(Dimensions.SmallRoundedCorner)
@@ -113,7 +110,7 @@ fun PokeCardDialog(
                             Sprite(
                                 pokemon = pokemon,
                                 modifier = Modifier
-                                    .fillMaxWidth(0.9f)     //TODO(extract)
+                                    .fillMaxWidth(Dimensions.pokecardSpriteScale)
                                     .zIndex(-1f)
                             )
                         }
