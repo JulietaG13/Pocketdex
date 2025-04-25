@@ -1,9 +1,11 @@
 package com.austral.pocketdex.ui.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.googlefonts.Font
 import androidx.compose.ui.text.googlefonts.GoogleFont
@@ -35,6 +37,23 @@ val Typography.pokeCardId: TextStyle
 val Typography.pokeCardDescription: TextStyle
     @Composable
     get() = Typography.bodyMedium.copy(fontSize = 16.sp, lineHeight = 18.sp)
+
+val Typography.guessResult: TextStyle
+    @Composable
+    get() = TextStyle(
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        color = Typography.titleLarge.color
+    )
+
+val Typography.guessClues: TextStyle
+    @Composable
+    get() = Typography.bodyMedium.copy(
+        fontStyle = FontStyle.Italic,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
+    )
+
 
 val Typography = Typography(
 

@@ -36,15 +36,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.austral.pocketdex.R
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
+import com.austral.pocketdex.ui.theme.guessClues
+import com.austral.pocketdex.ui.theme.guessResult
 import com.austral.pocketdex.viewmodel.GuessViewModel
 
 @Composable
@@ -138,7 +138,6 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                 },
                 textStyle = TextStyle(
                     color = MaterialTheme.colorScheme.onSurface,
-                    fontSize = 20.sp,
                     textAlign = TextAlign.Center
                 ),
                 singleLine = true,
@@ -185,9 +184,7 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                 items(revealedHints, key = { it.length }) { hint ->
                     Text(
                         text = hint,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontStyle = FontStyle.Italic,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.guessClues,
                         modifier = Modifier
                             .padding(top = Dimensions.SmallPadding)
                             .animateItem()
@@ -208,7 +205,7 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                 Text(
                     text = stringResource(R.string.guess_screen_successful_guess, pokemon.name),
                     color = MaterialTheme.colorScheme.primary,
-                    fontSize = 26.sp,
+                    style = MaterialTheme.typography.guessResult,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -234,8 +231,7 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
                 Text(
                     text = stringResource(R.string.guess_screen_failure_message),
                     color = MaterialTheme.colorScheme.error,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.guessResult,
                     textAlign = TextAlign.Center
                 )
 
