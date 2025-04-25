@@ -39,7 +39,7 @@ class PokemonMapper @Inject constructor() {
     }
 
     fun toPokemonType(type: PokemonTypeData): PokemonType {
-        return PokemonType.fromString(type.name) ?: PokemonType.NORMAL  // TODO(handle)
+        return PokemonType.fromString(type.name) ?: PokemonType.NORMAL
     }
 
     fun toDescription(context: Context, flavorTextEntries: List<FlavorTextEntryData>): String {
