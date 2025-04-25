@@ -6,10 +6,6 @@ val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
-
 val Orange70 = Color(0xFF894909)
 val Orange60 = Color(0xFFB6620C)
 val Orange50 = Color(0xFFE47A0F)
@@ -30,7 +26,9 @@ val Red10 = Color(0xFFf2D1CE)
 val White50 = Color(0xFFFBF7F4)
 
 val ListItemBackground = Orange10.copy(alpha = 0.8f)
+val ProfileBackground = Color.White.copy(alpha = 0.5f)
 
+val whiteShimmer = Color.White.copy(alpha = 0.8f)
 
 val TypeNormal = Color(0xFFA8A77A)
 val TypeFire = Color(0xFFEE8130)

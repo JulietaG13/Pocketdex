@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import com.austral.pocketdex.ui.theme.whiteShimmer
 
 @Composable
 fun shimmerBorderBrush(): Brush {
@@ -27,9 +28,9 @@ fun shimmerBorderBrush(): Brush {
 
     val colors = listOf(
         0.0f + shimmerOffset to Color.Transparent,
-        0.1f + shimmerOffset to Color.White.copy(alpha = 0.8f),
+        0.1f + shimmerOffset to whiteShimmer,
         0.2f + shimmerOffset to Color.Transparent,
-        0.3f + shimmerOffset to Color.White.copy(alpha = 0.8f),
+        0.3f + shimmerOffset to whiteShimmer,
         0.4f + shimmerOffset to Color.Transparent,
     )
 

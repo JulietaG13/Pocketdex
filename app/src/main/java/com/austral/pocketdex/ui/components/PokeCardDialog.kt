@@ -40,7 +40,7 @@ fun PokeCardDialog(
     onDismiss: () -> Unit
 ) {
 
-    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)   // TODO(extract)
+    val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)
 
     Dialog(onDismissRequest = { onDismiss() }) {
         Box(contentAlignment = Alignment.Center) {

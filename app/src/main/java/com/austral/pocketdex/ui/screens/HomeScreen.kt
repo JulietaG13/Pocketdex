@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -29,6 +28,7 @@ import com.austral.pocketdex.ui.components.MovingPokeballBackground
 import com.austral.pocketdex.ui.components.Profile
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
+import com.austral.pocketdex.ui.theme.ProfileBackground
 import com.austral.pocketdex.viewmodel.HomeViewModel
 
 @Composable
@@ -50,7 +50,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(Dimensions.LargeRoundedCorner))
-                .background(Color.White.copy(alpha = 0.5f))
+                .background(ProfileBackground)
                 .padding(Dimensions.LargePadding * 3)
                 .padding(bottom = Dimensions.LargePadding * 3)
         ) {
