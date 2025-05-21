@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "found_pokemon")
 data class FoundPokemon(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    val id: Int,
     val name: String
 )

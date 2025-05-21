@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.austral.pocketdex.R
+import com.austral.pocketdex.data.entities.FoundPokemon
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.data.repository.PokemonRepository
+import com.austral.pocketdex.storage.PocketdexDatabase
 import com.austral.pocketdex.util.MockPokemonApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,6 +26,8 @@ class GuessViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val repository: PokemonRepository
 ) : ViewModel() {
+
+    private val database = PocketdexDatabase.getDatabase(context)
 
     private val _pokemon = MutableStateFlow<Pokemon>(Pokemon.EMPTY)
     val pokemon: StateFlow<Pokemon> = _pokemon.asStateFlow()
@@ -79,7 +83,7 @@ class GuessViewModel @Inject constructor(
     fun onCheckGuess() {
         if (_guess.value.isNotBlank() && _triesLeft.value > 0) {
             if (_guess.value.lowercase().trim() == _pokemon.value.name.lowercase()) {
-                _showSuccess.value = true
+                onSuccess()
                 return
             }
             _triesLeft.value--
@@ -88,6 +92,15 @@ class GuessViewModel @Inject constructor(
             } else {
                 _showFailure.value = true
             }
+        }
+    }
+
+    fun onSuccess() {
+        _showSuccess.value = true
+        val pokemon = _pokemon.value
+        val found = FoundPokemon(id = pokemon.id, name = pokemon.name)
+        viewModelScope.launch {
+            database.PokemonDao().insert(found)
         }
     }
 

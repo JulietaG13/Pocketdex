@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.austral.pocketdex.R
 import com.austral.pocketdex.data.model.Pokemon
 import com.austral.pocketdex.data.repository.PokemonRepository
+import com.austral.pocketdex.storage.PocketdexDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,8 @@ class DexViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val repository: PokemonRepository
 ) : ViewModel() {
+
+    private val database = PocketdexDatabase.getDatabase(context)
 
     private val _pokemons = MutableStateFlow<List<Pokemon>>(emptyList())
     val pokemons: StateFlow<List<Pokemon>> = _pokemons.asStateFlow()
@@ -51,7 +54,7 @@ class DexViewModel @Inject constructor(
             loadMorePokemons()
             loadMorePokemons()
 
-            _foundPokemonIds.value = repository.getFoundPokemonsIds(context).toSet()
+            _foundPokemonIds.value = database.PokemonDao().getAll().map { it.id }.toSet()
         }
     }
 

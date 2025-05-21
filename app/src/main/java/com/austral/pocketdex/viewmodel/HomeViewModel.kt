@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.austral.pocketdex.data.repository.PokemonRepository
+import com.austral.pocketdex.storage.PocketdexDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,9 +14,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val repository: PokemonRepository
+    @ApplicationContext private val context: Context
 ) : ViewModel() {
+
+    private val database = PocketdexDatabase.getDatabase(context)
 
     private val _found = MutableStateFlow(0)
     val found: StateFlow<Int> = _found
@@ -24,7 +26,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _found.value = repository.getFoundPokemonsIds(context).size
+            _found.value = database.PokemonDao().countAll()
         }
     }
 }
