@@ -26,4 +26,7 @@ interface PokemonDao {
     @Query("DELETE FROM found_pokemon WHERE id = :id")
     suspend fun deleteById(id: Long)
 
+    @Query("DELETE FROM found_pokemon")
+    suspend fun deleteAll()
+
 }

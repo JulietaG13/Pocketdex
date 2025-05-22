@@ -9,6 +9,7 @@
     <string name="dex_screen_top_bar_toggle_all">All</string>
 
     <string name="home_screen_found_pokemon">Found: %1$d/%2$d</string>
+    <string name="home_screen_delete_progress">Delete progress</string>
 
     <string name="guess_screen_placeholder_whos_that_pokemon">Who\'s that Pokémon?</string>
     <string name="guess_screen_attempts_left">Attempts left: %1$d</string>
@@ -50,4 +51,6 @@
     <string name="pokemon_type_steel">Steel</string>
     <string name="pokemon_type_fairy">Fairy</string>
 
+    <string name="bio_auth_on_error">There was an error in the authentication</string>
+    <string name="bio_auth_on_fail">The authentication failed, try again</string>
 </resources>
