@@ -1,5 +1,7 @@
 package com.austral.pocketdex.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +23,7 @@ import com.austral.pocketdex.ui.screens.GuessScreen
 import com.austral.pocketdex.ui.screens.HomeScreen
 import com.austral.pocketdex.ui.theme.Dimensions
 
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
 fun NavHostComposable(
     innerPadding: PaddingValues,

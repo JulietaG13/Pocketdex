@@ -11,6 +11,8 @@ object Dimensions {
     val MediumSpacer = 20.dp
     val LargeSpacer = 40.dp
 
+    val borderStroke = 1.dp
+
     val MinSpriteSize = 80.dp
 
     val CardBorderWidth = 14.dp

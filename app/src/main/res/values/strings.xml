@@ -10,6 +10,13 @@
 
     <string name="home_screen_found_pokemon">Found: %1$d/%2$d</string>
     <string name="home_screen_delete_progress">Delete progress</string>
+    <string name="home_screen_settings_button">Settings</string>
+
+    <string name="settings_modal_title">Settings</string>
+    <string name="settings_modal_placeholder_text">Settings content will go here.</string>
+    <string name="settings_modal_close_button">Close</string>
+    <string name="settings_modal_sign_out_button">Sign out</string>
+    <string name="settings_modal_delete_all_button">Delete all progress</string>
 
     <string name="guess_screen_placeholder_whos_that_pokemon">Who\'s that Pokémon?</string>
     <string name="guess_screen_attempts_left">Attempts left: %1$d</string>
@@ -53,4 +60,18 @@
 
     <string name="bio_auth_on_error">There was an error in the authentication</string>
     <string name="bio_auth_on_fail">The authentication failed, try again</string>
+
+    <string name="search_bar_text">Search Pokemon</string>
+    <string name="search_bar_leading_icon_description">Search</string>
+
+    <string name="google_login_button_text">Sign in with Google</string>
+    <string name="google_login_button_icon_description">Google logo</string>
+
+    <string name="unknown_pokemon">Unknown Pokemon</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_login_failed">Login failed</string>
+    <string name="error_logout_failed">Logout failed</string>
+    <string name="error_credential_manager_not_available">Credential manager not available</string>
+    <string name="error_delete_all_failed">Failed to delete all progress</string>
 </resources>
