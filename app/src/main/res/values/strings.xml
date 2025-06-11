@@ -78,4 +78,11 @@
     <string name="notification_content_title">Your pokemons are sad :(</string>
     <string name="notification_content_text">Why did you leave your pockedex?</string>
     <string name="notification_channel">Pocketdex Notification</string>
+
+    <string name="biometric_error_no_hardware">This phone is not prepared for biometric features</string>
+    <string name="biometric_error_unavailable">Biometric auth is unavailable</string>
+    <string name="biometric_error_security_update_required">You can\'t use biometric auth until you have updated your security details</string>
+    <string name="biometric_error_unsupported">You can\'t use biometric auth with this Android version</string>
+    <string name="biometric_error_status_unknown">You can\'t use biometric auth</string>
+    <string name="biometric_error_none_enrolled">You can\'t use biometric auth</string>
 </resources>
