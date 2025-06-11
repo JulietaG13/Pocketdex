@@ -1,32 +1,34 @@
 [versions]
-agp = "8.9.0"
+accompanistPermissions = "0.31.1-alpha"
+agp = "8.9.3"
 biometric = "1.2.0-alpha05"
 coilNetworkOkhttp = "3.1.0"
 converterGson = "2.0.0-beta2"
 credentialsPlayServicesAuth = "1.5.0"
-datastorePreferences = "1.1.6"
+datastorePreferences = "1.1.7"
 googleid = "1.1.1"
 googleServicesVersion = "4.4.2"
-firebaseBom = "33.13.0"
+firebaseBom = "33.15.0"
 hiltAndroid = "2.49"
 hiltAndroidCompiler = "2.44"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.0.21"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.7"
+lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
-composeBom = "2024.09.00"
-navigationCompose = "2.8.9"
+composeBom = "2025.06.00"
+navigationCompose = "2.9.0"
 retrofit = "2.9.0"
 roomRuntime = "2.7.1"
 roomKtx = "2.7.1"
-uiTextGoogleFonts = "1.7.8"
-firebaseAuthKtx = "23.2.0"
+uiTextGoogleFonts = "1.8.2"
+firebaseAuthKtx = "23.2.1"
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }

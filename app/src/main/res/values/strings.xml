@@ -74,4 +74,8 @@
     <string name="error_logout_failed">Logout failed</string>
     <string name="error_credential_manager_not_available">Credential manager not available</string>
     <string name="error_delete_all_failed">Failed to delete all progress</string>
+
+    <string name="notification_content_title">Your pokemons are sad :(</string>
+    <string name="notification_content_text">Why did you leave your pockedex?</string>
+    <string name="notification_channel">Pocketdex Notification</string>
 </resources>
