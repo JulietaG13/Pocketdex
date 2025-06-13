@@ -157,7 +157,9 @@ class GuessViewModel @Inject constructor(
             else -> context.getString(R.string.guess_screen_clue_error_1)
         }
 
-        val firstLetterClue = pokemon.name.firstOrNull()?.let {
+//        val firstLetterClue = pokemon.name.firstOrNull()?.let {
+        val clue = pokemon.name + " ... yeah"
+        val firstLetterClue = clue.let {
             context.getString(R.string.guess_screen_clue_first_letter_of_name, it)
         } ?: context.getString(R.string.guess_screen_clue_error_2)
 
