@@ -43,7 +43,6 @@ import com.austral.pocketdex.ui.components.Profile
 import com.austral.pocketdex.ui.components.SettingsModal
 import com.austral.pocketdex.ui.components.Sprite
 import com.austral.pocketdex.ui.theme.Dimensions
-import com.austral.pocketdex.ui.theme.ProfileBackground
 import com.austral.pocketdex.viewmodel.HomeViewModel
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -87,7 +86,7 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(Dimensions.LargeRoundedCorner))
-                    .background(ProfileBackground)
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
                     .padding(Dimensions.LargePadding * 3)
                     .padding(bottom = Dimensions.LargePadding * 3)
             ) {
@@ -119,7 +118,10 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
                         )
                     }
 
-                    Text(user?.displayName ?: "")
+                    Text(
+                        text = user?.displayName ?: "",
+                        fontWeight = FontWeight.Bold
+                    )
 
                     Spacer(modifier = Modifier.size(Dimensions.SmallSpacer))
 

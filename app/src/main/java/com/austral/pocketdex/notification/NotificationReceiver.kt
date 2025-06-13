@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import androidx.compose.ui.res.stringResource
 import androidx.core.app.NotificationCompat
 import com.austral.pocketdex.MainActivity
 import com.austral.pocketdex.R

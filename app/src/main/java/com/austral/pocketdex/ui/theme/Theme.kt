@@ -1,6 +1,5 @@
 package com.austral.pocketdex.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -32,9 +31,17 @@ private val LightExtendedColors = ExtendedColors(
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = Orange60,
+    secondary = Red60,
+    tertiary = Orange80,
+
+    background = Color(0xFF2D2C31),
+    surface = Color(0xFF2D2C31),
+    onPrimary = White50,
+    onSecondary = White50,
+    onTertiary = White50,
+    onBackground = White50,
+    onSurface = White50,
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -70,13 +77,11 @@ fun PocketdexTheme(
         else -> LightColorScheme
     }
 
-//    val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
-    val extendedColors = LightExtendedColors
+    val extendedColors = if (darkTheme) DarkExtendedColors else LightExtendedColors
 
     CompositionLocalProvider(LocalExtendedColors provides extendedColors) {
         MaterialTheme(
-//            colorScheme = colorScheme,
-            colorScheme = LightColorScheme,
+            colorScheme = colorScheme,
             typography = Typography,
             content = content
         )

@@ -1,5 +1,6 @@
 package com.austral.pocketdex.ui.components
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Offset
@@ -13,6 +14,8 @@ fun typeBorderBrush(
     types: List<PokemonType>
 ): Brush {
 
+    val background = MaterialTheme.colorScheme.surface
+
     val gradientStops = remember(types) {
         val stops = mutableListOf<Pair<Float, Color>>()
         val typeColors = types.map { it.color }
@@ -23,7 +26,7 @@ fun typeBorderBrush(
             for (i in typeColors.indices) {
                 val position = i * step * 2
                 stops.add(position to typeColors[i])
-                stops.add(position + step to Color.White)
+                stops.add(position + step to background)
             }
             stops.add(1f to typeColors.last())
         }

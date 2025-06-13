@@ -39,14 +39,20 @@ fun PokeCardDialog(
     pokemon: Pokemon,
     onDismiss: () -> Unit
 ) {
-
+    val surfaceColor = MaterialTheme.colorScheme.surface
     val containerColor = pokemon.type[0].color.copy(alpha = 0.2f)
+    val blendedColor = Color(
+        red = (1 - containerColor.alpha) * surfaceColor.red + containerColor.alpha * containerColor.red,
+        green = (1 - containerColor.alpha) * surfaceColor.green + containerColor.alpha * containerColor.green,
+        blue = (1 - containerColor.alpha) * surfaceColor.blue + containerColor.alpha * containerColor.blue,
+        alpha = 1f
+    )
 
     Dialog(onDismissRequest = { onDismiss() }) {
         Box(contentAlignment = Alignment.Center) {
             Card(
                 shape = RoundedCornerShape(Dimensions.LargeRoundedCorner),
-                colors = CardDefaults.cardColors(containerColor = containerColor),
+                colors = CardDefaults.cardColors(containerColor = blendedColor),
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(Dimensions.pokecardCardAspectRatio)
@@ -79,7 +85,7 @@ fun PokeCardDialog(
                             .zIndex(1f),
                         text = pokemon.name,
                         style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onSurface,
                         textAlign = TextAlign.Left
                     )
 
@@ -96,7 +102,7 @@ fun PokeCardDialog(
                             .fillMaxWidth()
                             .aspectRatio(Dimensions.pokecardPokeBoxAspectRatio)
                             .background(
-                                Color.White,
+                                MaterialTheme.colorScheme.surface,
                                 shape = RoundedCornerShape(Dimensions.SmallRoundedCorner)
                             )
                     ) {

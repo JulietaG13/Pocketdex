@@ -4,11 +4,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.austral.pocketdex.data.model.Pokemon
-import com.austral.pocketdex.ui.theme.ListItemBackground
 
 @Composable
 fun PokeListItem(
@@ -19,7 +18,9 @@ fun PokeListItem(
 ) {
     Card(
         onClick = { onClick() },
-        colors = CardDefaults.cardColors(containerColor = ListItemBackground),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f)
+        ),
         modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)

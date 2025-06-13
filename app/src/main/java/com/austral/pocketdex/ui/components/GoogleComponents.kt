@@ -10,10 +10,10 @@ import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.austral.pocketdex.ui.theme.Dimensions
 
@@ -37,11 +37,11 @@ private fun GoogleButtonUI(
         modifier = modifier,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White,
-            contentColor = Color.Black
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
         ),
         shape = RoundedCornerShape(Dimensions.LargeRoundedCorner),
-        border = BorderStroke(Dimensions.borderStroke, Color.LightGray),
+        border = BorderStroke(Dimensions.borderStroke, MaterialTheme.colorScheme.outline),
         contentPadding = PaddingValues(
             horizontal = Dimensions.LargePadding,
             vertical = Dimensions.SmallPadding
