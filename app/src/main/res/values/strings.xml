@@ -76,7 +76,7 @@
     <string name="error_delete_all_failed">Failed to delete all progress</string>
 
     <string name="notification_content_title">Your pokemons are sad :(</string>
-    <string name="notification_content_text">Why did you leave your pockedex?</string>
+    <string name="notification_content_text">Why did you leave your pocketdex?</string>
     <string name="notification_channel">Pocketdex Notification</string>
 
     <string name="biometric_error_no_hardware">This phone is not prepared for biometric features</string>
