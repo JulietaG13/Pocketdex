@@ -63,22 +63,23 @@ fun GuessScreen(viewModel: GuessViewModel = hiltViewModel<GuessViewModel>()) {
     val errorMessage by viewModel.errorMessage.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
-    /* DEBUG */
     val context = LocalContext.current
-    IconButton(
-        onClick = {
-            Toast.makeText(context, "(just debug) Pokemon: ${pokemon.name}", Toast.LENGTH_SHORT).show()
-        },
-        modifier = Modifier
-            .padding(8.dp)
-            .size(32.dp)
-    ) {
-        Icon(
-            imageVector = Icons.Rounded.Warning,
-            contentDescription = "Show Pokémon Name"
-        )
-    }
-    /* END DEBUG */
+
+//    /* DEBUG */
+//    IconButton(
+//        onClick = {
+//            Toast.makeText(context, "(just debug) Pokemon: ${pokemon.name}", Toast.LENGTH_SHORT).show()
+//        },
+//        modifier = Modifier
+//            .padding(8.dp)
+//            .size(32.dp)
+//    ) {
+//        Icon(
+//            imageVector = Icons.Rounded.Warning,
+//            contentDescription = "Show Pokémon Name"
+//        )
+//    }
+//    /* END DEBUG */
 
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotBlank()) {
